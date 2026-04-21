@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>99Times Square — QR Menu</title>
+<link rel="icon" type="image/png" href="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADhAOEDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAcBAgMFBgQI" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #c8973a;
+    --gold-light: #f0c060;
+    --dark: #1a120b;
+    --dark2: #2d1f0e;
+    --cream: #fdf6ec;
+    --cream2: #f8eedc;
+    --text: #3d2c1e;
+    --text-light: #7a5c42;
+    --accent: #e05a2b;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --shadow: 0 8px 32px rgba(0,0,0,0.12);
+    --shadow-lg: 0 20px 60px rgba(0,0,0,0.18);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+  /* ─── TABLE ENTRY SCREEN ─── */
+  #tableEntryScreen {
+    position:fixed;inset:0;z-index:1000;
+    background: linear-gradient(135deg, #1a120b 0%, #3d1f05 50%, #1a120b 100%);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  #tableEntryScreen::before {
+    content:'';position:absolute;inset:0;
+    background: radial-gradient(ellipse at 50% 20%, rgba(200,151,58,0.22) 0%, transparent 65%),
+                radial-gradient(ellipse at 80% 80%, rgba(224,90,43,0.12) 0%, transparent 55%);
+  }
+  .entry-card {
+    background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);
+    border:1px solid rgba(200,151,58,0.3);border-radius:28px;
+    padding:40px 32px;width:100%;max-width:380px;text-align:center;
+    position:relative;z-index:1;box-shadow:0 24px 64px rgba(0,0,0,0.5);
+    animation:entryCardIn 0.6s cubic-bezier(.32,1.25,.42,.97) both;
+  }
+  @keyframes entryCardIn{from{opacity:0;transform:translateY(40px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .entry-logo-ring{width:88px;height:88px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;margin:0 auto 16px;box-shadow:0 0 0 8px rgba(200,151,58,0.15),0 8px 28px rgba(0,0,0,0.4);}
+  .entry-logo-ring img{width:100%;height:100%;object-fit:cover;}
+  .entry-title{font-family:'Playfair Display',serif;color:#fff;font-size:2rem;font-weight:700;line-height:1.1;margin-bottom:4px;}
+  .entry-subtitle{color:var(--gold-light);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;}
+  .entry-label{color:rgba(255,255,255,0.7);font-size:0.82rem;margin-bottom:10px;text-align:left;font-weight:500;}
+  .entry-input-wrap{position:relative;margin-bottom:20px;}
+  .entry-input-wrap i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:1rem;}
+  #tableInput{width:100%;padding:14px 16px 14px 44px;background:rgba(255,255,255,0.1);border:2px solid rgba(200,151,58,0.35);border-radius:14px;color:#fff;font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;outline:none;transition:border-color 0.3s,background 0.3s;text-align:left;letter-spacing:1px;}
+  #tableInput::placeholder{color:rgba(255,255,255,0.35);font-weight:400;font-size:0.9rem;}
+  #tableInput:focus{border-color:var(--gold);background:rgba(200,151,58,0.1);}
+  #tableInput::-webkit-inner-spin-button,#tableInput::-webkit-outer-spin-button{-webkit-appearance:none;}
+  .entry-error{color:#ff8a80;font-size:0.78rem;margin-top:-14px;margin-bottom:14px;text-align:left;display:none;}
+  .entry-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;border:none;border-radius:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:0.5px;transition:all 0.3s;box-shadow:0 6px 24px rgba(200,151,58,0.4);display:flex;align-items:center;justify-content:center;gap:8px;}
+  .entry-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(200,151,58,0.55);}
+  .entry-note{color:rgba(255,255,255,0.4);font-size:0.72rem;margin-top:20px;}
+
+  /* ─── HERO HEADER ─── */
+  #mainApp{display:none;}
+  .hero{background:linear-gradient(135deg,#1a120b 0%,#3d1f05 60%,#1a120b 100%);padding:0 0 30px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%,rgba(200,151,58,0.18) 0%,transparent 70%),radial-gradient(ellipse at 10% 100%,rgba(224,90,43,0.1) 0%,transparent 60%);}
+  .hero-top{display:flex;align-items:center;justify-content:space-between;padding:18px 24px 0;position:relative;z-index:2;}
+  .table-badge{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;padding:7px 18px;border-radius:50px;font-weight:700;font-size:0.85rem;letter-spacing:0.5px;box-shadow:0 4px 14px rgba(200,151,58,0.4);display:flex;align-items:center;gap:6px;cursor:pointer;transition:transform 0.2s;}
+  .table-badge:hover{transform:scale(1.05);}
+  .restaurant-logo{text-align:center;padding:20px 24px 10px;position:relative;z-index:2;}
+  .logo-img-wrapper{width:80px;height:80px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;margin:0 auto 12px;box-shadow:0 0 0 6px rgba(200,151,58,0.15);}
+  .logo-img-wrapper img{width:100%;height:100%;object-fit:cover;}
+  .restaurant-name{font-family:'Playfair Display',serif;color:#fff;font-size:1.9rem;font-weight:700;line-height:1.1;letter-spacing:1px;}
+  .restaurant-tagline{color:var(--gold-light);font-size:0.78rem;font-weight:400;letter-spacing:3px;text-transform:uppercase;margin-top:4px;}
+  .hero-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 24px 0;opacity:0.4;}
+  .hero-divider span{flex:1;height:1px;background:var(--gold);}
+  .hero-divider i{color:var(--gold);font-size:0.7rem;}
+
+  /* ─── CONTROLS ─── */
+  .controls{padding:20px 20px 0;position:sticky;top:0;z-index:100;background:var(--cream);border-bottom:1px solid rgba(200,151,58,0.15);box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+  .search-wrap{position:relative;margin-bottom:14px;}
+  .search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:0.95rem;}
+  #searchInput{width:100%;padding:12px 14px 12px 40px;border:2px solid rgba(200,151,58,0.25);border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.9rem;background:#fff;color:var(--text);outline:none;transition:border-color 0.3s,box-shadow 0.3s;}
+  #searchInput:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(200,151,58,0.1);}
+  #searchInput::placeholder{color:#b89a7a;}
+  .categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none;}
+  .categories::-webkit-scrollbar{display:none;}
+  .cat-btn{flex-shrink:0;padding:8px 18px;border-radius:50px;border:2px solid rgba(200,151,58,0.3);background:transparent;color:var(--text-light);font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.25s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+  .cat-btn.active,.cat-btn:hover{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;border-color:transparent;box-shadow:0 4px 14px rgba(200,151,58,0.35);transform:translateY(-1px);}
+
+  /* ─── MENU GRID ─── */
+  .menu-section{padding:22px 16px 120px;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--dark);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+  @media(min-width:600px){.menu-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}}
+  @media(min-width:900px){.menu-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}}
+  .menu-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.07);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;position:relative;border:1px solid rgba(200,151,58,0.1);animation:fadeInUp 0.4s ease both;}
+  .menu-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.13);}
+  .card-img{width:100%;height:160px;object-fit:cover;display:block;transition:transform 0.4s;}
+  .menu-card:hover .card-img{transform:scale(1.06);}
+  .card-img-wrap{overflow:hidden;position:relative;}
+  .veg-badge{position:absolute;top:10px;left:10px;width:22px;height:22px;border:2px solid;border-radius:4px;display:flex;align-items:center;justify-content:center;}
+  .veg-badge.veg{border-color:#27ae60;background:rgba(255,255,255,0.9);}
+  .veg-badge.veg::after{content:'';width:9px;height:9px;background:#27ae60;border-radius:50%;}
+  .veg-badge.nonveg{border-color:#e74c3c;background:rgba(255,255,255,0.9);}
+  .veg-badge.nonveg::after{content:'';width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #e74c3c;}
+  .bestseller{position:absolute;top:10px;right:10px;background:var(--gold);color:#1a120b;font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:50px;letter-spacing:0.5px;text-transform:uppercase;}
+  .card-body{padding:14px 14px 16px;}
+  .card-name{font-weight:600;font-size:0.92rem;color:var(--dark);margin-bottom:4px;line-height:1.3;}
+  .card-desc{font-size:0.72rem;color:var(--text-light);margin-bottom:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .card-price{font-weight:700;font-size:1.05rem;color:var(--accent);}
+  .card-price span{font-size:0.75rem;font-weight:400;color:var(--text-light);}
+  .add-btn{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;border:none;border-radius:50px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.78rem;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:5px;box-shadow:0 3px 10px rgba(200,151,58,0.3);}
+  .add-btn:hover{transform:scale(1.05);box-shadow:0 6px 18px rgba(200,151,58,0.45);}
+  .qty-control{display:flex;align-items:center;gap:8px;background:#f5f0ea;border-radius:50px;padding:4px;}
+  .qty-btn{width:26px;height:26px;border-radius:50%;border:none;background:var(--gold);color:#1a120b;font-size:0.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.15s;}
+  .qty-btn:hover{transform:scale(1.15);}
+  .qty-num{font-weight:700;font-size:0.9rem;min-width:16px;text-align:center;}
+
+  /* ─── FLOATING CART ─── */
+  .cart-fab{position:fixed;bottom:24px;right:20px;z-index:200;background:linear-gradient(135deg,#1a120b,#3d1f05);color:#fff;width:62px;height:62px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,0.35);transition:transform 0.3s;}
+  .cart-fab:hover{transform:scale(1.1);}
+  .cart-fab.bounce{animation:cartBounce 0.4s ease;}
+  .cart-count{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;font-size:0.7rem;font-weight:700;display:none;align-items:center;justify-content:center;border:2px solid #fff;}
+  .cart-count.show{display:flex;}
+
+  /* ─── FEEDBACK FAB ─── */
+  .feedback-fab{position:fixed;bottom:100px;right:20px;z-index:200;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;width:52px;height:52px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 6px 20px rgba(37,211,102,0.4);transition:transform 0.3s;animation:pulseGreen 2s infinite;}
+  .feedback-fab:hover{transform:scale(1.1);animation:none;}
+  @keyframes pulseGreen{0%,100%{box-shadow:0 6px 20px rgba(37,211,102,0.4)}50%{box-shadow:0 6px 30px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.15)}}
+  .feedback-fab-tooltip{position:fixed;bottom:108px;right:80px;background:#1a120b;color:#fff;padding:6px 12px;border-radius:8px;font-size:0.72rem;font-weight:500;white-space:nowrap;z-index:201;pointer-events:none;opacity:0;transition:opacity 0.3s;}
+  .feedback-fab-tooltip.show{opacity:1;}
+  .feedback-fab-tooltip::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:#1a120b;border-right:none;}
+
+  /* ─── CART MODAL ─── */
+  .modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(26,18,11,0.6);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity 0.3s;}
+  .modal-overlay.open{display:block;}
+  .modal-overlay.visible{opacity:1;}
+  .cart-panel{position:fixed;bottom:0;left:0;right:0;z-index:301;background:var(--cream);border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
+  .cart-panel.open{transform:translateY(0);}
+  .cart-panel::-webkit-scrollbar{width:4px;}
+  .cart-panel::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+  .cart-handle{width:40px;height:4px;background:rgba(200,151,58,0.4);border-radius:2px;margin:12px auto 0;}
+  .cart-header{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(200,151,58,0.2);}
+  .cart-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;}
+  .cart-close{width:34px;height:34px;border-radius:50%;background:rgba(200,151,58,0.15);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--text);transition:background 0.2s;}
+  .cart-close:hover{background:rgba(200,151,58,0.3);}
+  .order-summary-card{margin:16px 16px 0;background:#fff;border-radius:var(--radius);border:1px solid rgba(200,151,58,0.2);box-shadow:0 6px 24px rgba(0,0,0,0.07);overflow:hidden;}
+  .summary-header{background:linear-gradient(135deg,#1a120b,#3d1f05);padding:20px;text-align:center;}
+  .summary-logo{width:60px;height:60px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;margin:0 auto 10px;display:block;}
+  .summary-restaurant{font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;}
+  .summary-table{background:var(--gold);color:#1a120b;padding:3px 14px;border-radius:50px;font-size:0.75rem;font-weight:700;display:inline-block;margin-top:8px;}
+  .summary-divider{display:flex;align-items:center;gap:8px;padding:0 20px;margin:14px 0 4px;color:var(--text-light);font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;}
+  .summary-divider::before,.summary-divider::after{content:'';flex:1;height:1px;background:rgba(200,151,58,0.25);}
+  .cart-items-list{padding:0 16px 4px;}
+  .cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(200,151,58,0.1);animation:fadeInLeft 0.3s ease;}
+  .cart-item:last-child{border-bottom:none;}
+  .ci-img{width:52px;height:52px;border-radius:10px;object-fit:cover;flex-shrink:0;border:1px solid rgba(200,151,58,0.2);}
+  .ci-info{flex:1;}
+  .ci-name{font-weight:600;font-size:0.85rem;color:var(--dark);}
+  .ci-price{font-size:0.78rem;color:var(--text-light);}
+  .ci-controls{display:flex;align-items:center;gap:6px;}
+  .ci-qty-btn{width:28px;height:28px;border-radius:50%;border:2px solid rgba(200,151,58,0.4);background:transparent;color:var(--text);font-weight:700;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+  .ci-qty-btn:hover{background:var(--gold);border-color:var(--gold);color:#1a120b;}
+  .ci-qty{font-weight:700;min-width:18px;text-align:center;font-size:0.9rem;}
+  .ci-remove{width:28px;height:28px;border-radius:50%;border:none;background:rgba(231,76,60,0.1);color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.75rem;transition:background 0.2s;margin-left:4px;}
+  .ci-remove:hover{background:var(--red);color:#fff;}
+  .summary-total{margin:0 16px;padding:14px 16px;background:linear-gradient(135deg,rgba(200,151,58,0.08),rgba(200,151,58,0.04));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(200,151,58,0.2);margin-bottom:16px;}
+  .total-label{font-weight:600;font-size:0.9rem;color:var(--text-light);}
+  .total-amount{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--accent);}
+  .cart-empty{padding:40px 20px;text-align:center;color:var(--text-light);}
+  .cart-empty i{font-size:3rem;color:rgba(200,151,58,0.3);margin-bottom:12px;display:block;}
+  .action-btns{padding:0 16px 32px;display:flex;flex-direction:column;gap:10px;}
+  .btn-order{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:50px;padding:16px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.3s;box-shadow:0 6px 20px rgba(37,211,102,0.35);letter-spacing:0.5px;}
+  .btn-order:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.45);}
+  .btn-waiter{background:transparent;color:var(--dark);border:2px solid rgba(200,151,58,0.5);border-radius:50px;padding:14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.3s;}
+  .btn-waiter:hover{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:transparent;color:#1a120b;box-shadow:0 6px 20px rgba(200,151,58,0.35);transform:translateY(-2px);}
+
+  /* ─── ORDER CONFIRMATION MODAL ─── */
+  #confirmOverlay{position:fixed;inset:0;z-index:500;background:rgba(10,6,3,0.75);backdrop-filter:blur(6px);display:none;opacity:0;transition:opacity 0.35s;align-items:center;justify-content:center;padding:16px;}
+  #confirmOverlay.open{display:flex;}
+  #confirmOverlay.visible{opacity:1;}
+  .confirm-modal{background:#fff;border-radius:24px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.45);transform:scale(0.85) translateY(30px);transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);scrollbar-width:none;}
+  .confirm-modal::-webkit-scrollbar{display:none;}
+  #confirmOverlay.visible .confirm-modal{transform:scale(1) translateY(0);}
+  .confirm-header{background:linear-gradient(135deg,#1a120b,#3d1f05);padding:24px 20px 20px;text-align:center;border-radius:24px 24px 0 0;position:relative;}
+  .confirm-logo{width:58px;height:58px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;margin:0 auto 10px;display:block;}
+  .confirm-rest-name{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;font-weight:700;}
+  .confirm-table-pill{background:var(--gold);color:#1a120b;padding:3px 14px;border-radius:50px;font-size:0.72rem;font-weight:700;display:inline-block;margin-top:6px;}
+  .confirm-title{padding:18px 20px 6px;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:8px;}
+  .confirm-title i{color:var(--gold);}
+  .timer-section{margin:0 16px 14px;background:linear-gradient(135deg,#fff8ee,#fff3e0);border:2px solid rgba(200,151,58,0.35);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;}
+  .timer-ring-wrap{position:relative;flex-shrink:0;width:60px;height:60px;}
+  .timer-ring-wrap svg{transform:rotate(-90deg);}
+  #timerCircle{stroke-dasharray:163;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear;stroke:var(--gold);}
+  .timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:var(--dark);font-family:'Playfair Display',serif;}
+  .timer-text{flex:1;}
+  .timer-text strong{display:block;font-size:0.82rem;color:var(--dark);font-weight:600;margin-bottom:2px;}
+  .timer-text span{font-size:0.72rem;color:var(--text-light);}
+  .timer-urgent #timerCircle{stroke:#e74c3c !important;}
+  .timer-urgent .timer-num{color:#e74c3c;}
+  .timer-urgent{border-color:rgba(231,76,60,0.4);background:linear-gradient(135deg,#fff5f5,#fff0f0);}
+  .timer-urgent .timer-text strong{color:#e74c3c;}
+  .confirm-items-wrap{padding:0 16px 8px;}
+  .confirm-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed rgba(200,151,58,0.15);}
+  .confirm-item:last-child{border-bottom:none;}
+  .ci-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--gold);}
+  .ci-iname{flex:1;font-size:0.83rem;font-weight:500;color:var(--dark);}
+  .ci-iqty{font-size:0.78rem;color:var(--text-light);margin-right:6px;}
+  .ci-iprice{font-size:0.83rem;font-weight:700;color:var(--accent);}
+  .confirm-total-bar{margin:4px 16px 16px;padding:12px 16px;background:linear-gradient(135deg,rgba(200,151,58,0.1),rgba(200,151,58,0.05));border-radius:12px;border:1px solid rgba(200,151,58,0.25);display:flex;align-items:center;justify-content:space-between;}
+  .ctb-label{font-size:0.82rem;color:var(--text-light);font-weight:500;}
+  .ctb-amount{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--accent);}
+  .confirm-actions{padding:0 16px 24px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .confirm-actions .full-btn{grid-column:1/-1;}
+  .cbtn{padding:13px 10px;border-radius:14px;border:none;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.28s;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .cbtn-modify{background:#f5f0ea;color:var(--text);border:2px solid rgba(200,151,58,0.3);}
+  .cbtn-modify:hover{background:rgba(200,151,58,0.15);border-color:var(--gold);}
+  .cbtn-cancel{background:rgba(231,76,60,0.08);color:#c0392b;border:2px solid rgba(231,76,60,0.3);}
+  .cbtn-cancel:hover{background:#e74c3c;color:#fff;border-color:#e74c3c;box-shadow:0 4px 16px rgba(231,76,60,0.35);}
+  .cbtn-confirm{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;box-shadow:0 4px 16px rgba(37,211,102,0.35);font-size:0.92rem;padding:15px;}
+  .cbtn-confirm:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.45);}
+  .cbtn-confirm:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+
+  /* ─── AI FEEDBACK CHAT MODAL ─── */
+  #feedbackOverlay{position:fixed;inset:0;z-index:600;background:rgba(10,6,3,0.8);backdrop-filter:blur(8px);display:none;opacity:0;transition:opacity 0.35s;align-items:flex-end;justify-content:center;}
+  #feedbackOverlay.open{display:flex;}
+  #feedbackOverlay.visible{opacity:1;}
+  .feedback-panel{background:#fff;border-radius:24px 24px 0 0;width:100%;max-width:480px;height:88vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);overflow:hidden;}
+  #feedbackOverlay.visible .feedback-panel{transform:translateY(0);}
+  .fb-header{background:linear-gradient(135deg,#1a120b,#3d1f05);padding:16px 20px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
+  .fb-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#1a120b;flex-shrink:0;box-shadow:0 0 0 3px rgba(200,151,58,0.3);}
+  .fb-header-info{flex:1;}
+  .fb-header-name{color:#fff;font-weight:700;font-size:0.95rem;}
+  .fb-header-status{color:var(--gold-light);font-size:0.72rem;display:flex;align-items:center;gap:5px;}
+  .fb-online-dot{width:7px;height:7px;background:#25d366;border-radius:50%;animation:blinkDot 1.5s infinite;}
+  @keyframes blinkDot{0%,100%{opacity:1}50%{opacity:0.3}}
+  .fb-close-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.15);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:background 0.2s;}
+  .fb-close-btn:hover{background:rgba(255,255,255,0.25);}
+  .fb-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(200,151,58,0.3) transparent;}
+  .fb-messages::-webkit-scrollbar{width:3px;}
+  .fb-messages::-webkit-scrollbar-thumb{background:rgba(200,151,58,0.3);border-radius:3px;}
+  .fb-msg{display:flex;gap:10px;animation:msgSlideIn 0.35s ease;}
+  @keyframes msgSlideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .fb-msg.user{flex-direction:row-reverse;}
+  .fb-msg-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;}
+  .fb-msg-avatar.bot{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;}
+  .fb-msg-avatar.user-av{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;}
+  .fb-bubble{max-width:75%;padding:11px 15px;border-radius:18px;font-size:0.85rem;line-height:1.5;}
+  .fb-msg.bot .fb-bubble{background:#f5f0ea;color:var(--dark);border-radius:4px 18px 18px 18px;}
+  .fb-msg.user .fb-bubble{background:linear-gradient(135deg,#1a120b,#3d1f05);color:#fff;border-radius:18px 4px 18px 18px;}
+  .fb-bubble.typing{background:#f5f0ea;}
+  .typing-dots{display:flex;gap:4px;padding:4px 0;}
+  .typing-dots span{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:typingBounce 1.2s infinite;}
+  .typing-dots span:nth-child(2){animation-delay:0.2s;}
+  .typing-dots span:nth-child(3){animation-delay:0.4s;}
+  @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+  .fb-quick-replies{display:flex;flex-wrap:wrap;gap:8px;padding:8px 16px 0;}
+  .fb-qr-btn{padding:8px 16px;background:#fff;border:2px solid rgba(200,151,58,0.4);border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.78rem;font-weight:600;color:var(--text);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+  .fb-qr-btn:hover{background:var(--gold);border-color:var(--gold);color:#1a120b;transform:scale(1.03);}
+  .fb-input-area{padding:12px 16px;border-top:1px solid rgba(200,151,58,0.15);display:flex;gap:10px;align-items:flex-end;flex-shrink:0;background:#fff;}
+  #fbTextInput{flex:1;padding:10px 16px;border:2px solid rgba(200,151,58,0.25);border-radius:50px;font-family:'Poppins',sans-serif;font-size:0.88rem;outline:none;resize:none;transition:border-color 0.3s;background:#fdf6ec;color:var(--text);max-height:100px;overflow-y:auto;}
+  #fbTextInput:focus{border-color:var(--gold);}
+  #fbTextInput::placeholder{color:#b89a7a;}
+  .fb-send-btn{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;color:#1a120b;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s;box-shadow:0 3px 10px rgba(200,151,58,0.35);}
+  .fb-send-btn:hover{transform:scale(1.1);box-shadow:0 6px 18px rgba(200,151,58,0.5);}
+  .fb-review-link{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4285f4,#1a73e8);color:#fff;padding:12px 16px;border-radius:14px;text-decoration:none;margin:4px 0;transition:all 0.25s;}
+  .fb-review-link:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(66,133,244,0.4);}
+  .fb-review-link i{font-size:1.2rem;}
+  .fb-review-link span{font-size:0.82rem;font-weight:600;}
+  .fb-sentiment-bar{display:flex;gap:8px;padding:6px 0;}
+  .fb-sentiment-btn{flex:1;padding:10px;border-radius:12px;border:2px solid;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .fb-sentiment-btn.happy{border-color:#27ae60;color:#27ae60;background:rgba(39,174,96,0.06);}
+  .fb-sentiment-btn.happy:hover,.fb-sentiment-btn.happy.selected{background:#27ae60;color:#fff;}
+  .fb-sentiment-btn.neutral{border-color:var(--gold);color:#8a6a2a;background:rgba(200,151,58,0.06);}
+  .fb-sentiment-btn.neutral:hover,.fb-sentiment-btn.neutral.selected{background:var(--gold);color:#1a120b;}
+  .fb-sentiment-btn.unhappy{border-color:#e74c3c;color:#e74c3c;background:rgba(231,76,60,0.06);}
+  .fb-sentiment-btn.unhappy:hover,.fb-sentiment-btn.unhappy.selected{background:#e74c3c;color:#fff;}
+  .fb-sentiment-btn .fb-emoji{font-size:1.4rem;}
+
+  /* ─── TOAST ─── */
+  .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:#1a120b;color:#fff;padding:12px 24px;border-radius:50px;font-size:0.85rem;font-weight:500;z-index:999;transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);display:flex;align-items:center;gap:8px;border:1px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,0.3);white-space:nowrap;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+  .toast i{color:var(--gold);}
+  .no-results{text-align:center;padding:40px 20px;color:var(--text-light);}
+  .no-results i{font-size:2.5rem;color:rgba(200,151,58,0.3);margin-bottom:12px;display:block;}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeInLeft{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes cartBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}70%{transform:scale(0.95)}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,0.4)}50%{box-shadow:0 0 0 8px rgba(231,76,60,0)}}
+  @media(min-width:768px){.cart-panel{max-width:480px;left:auto;right:0;border-radius:24px 0 0 24px;max-height:100vh;}.feedback-panel{border-radius:24px;height:85vh;margin-bottom:24px;}.hero{padding-bottom:40px;}.restaurant-name{font-size:2.4rem;}}
+  @media(min-width:1024px){.menu-section{padding:30px 40px 120px;}.controls{padding:20px 40px 0;}}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Added to cart!</span></div>
+
+<!-- TABLE ENTRY SCREEN -->
+<div id="tableEntryScreen">
+  <div class="entry-card">
+    <div class="entry-logo-ring">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80" alt="Restaurant Logo" onerror="this.style.display='none'" />
+    </div>
+    <div class="entry-title">99Times Square</div>
+    <div class="entry-subtitle">✦ Authentic Indian Cuisine ✦</div>
+    <div class="entry-label"><i class="fas fa-chair" style="color:var(--gold);margin-right:6px"></i>Enter your table number</div>
+    <div class="entry-input-wrap">
+      <i class="fas fa-hashtag"></i>
+      <input type="number" id="tableInput" placeholder="e.g. 5" min="1" max="99" autocomplete="off" />
+    </div>
+    <div class="entry-error" id="entryError"><i class="fas fa-exclamation-circle"></i> Please enter a valid table number (1–99)</div>
+    <button class="entry-btn" onclick="confirmTableEntry()">
+      <i class="fas fa-utensils"></i> View Menu
+    </button>
+    <div class="entry-note"><i class="fas fa-info-circle" style="margin-right:4px"></i>Your table number will appear on all orders</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp">
+  <div class="hero">
+    <div class="hero-top">
+      <div class="table-badge" id="tableBadge" title="Click to change table" onclick="changeTable()">
+        <i class="fas fa-chair"></i><span id="tableDisplay">Table 1</span>
+      </div>
+      <div style="color:rgba(255,255,255,0.6);font-size:0.75rem;display:flex;align-items:center;gap:5px;">
+        <i class="fas fa-wifi" style="color:var(--gold)"></i> Live Menu
+      </div>
+    </div>
+    <div class="restaurant-logo">
+      <div class="logo-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80" alt="Restaurant Logo" onerror="this.style.display='none'" />
+      </div>
+      <div class="restaurant-name">99Times Square</div>
+      <div class="restaurant-tagline">✦ Authentic Indian Cuisine ✦</div>
+    </div>
+    <div class="hero-divider">
+      <span></span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span></span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search dishes..." />
+    </div>
+    <div class="categories">
+      <button class="cat-btn active" data-cat="all"><i class="fas fa-th-large"></i> All</button>
+      <button class="cat-btn" data-cat="starters"><i class="fas fa-pepper-hot"></i> Starters</button>
+      <button class="cat-btn" data-cat="main"><i class="fas fa-drumstick-bite"></i> Main Course</button>
+      <button class="cat-btn" data-cat="breads"><i class="fas fa-bread-slice"></i> Breads</button>
+      <button class="cat-btn" data-cat="rice"><i class="fas fa-bowl-rice"></i> Rice &amp; Biryani</button>
+      <button class="cat-btn" data-cat="desserts"><i class="fas fa-ice-cream"></i> Desserts</button>
+      <button class="cat-btn" data-cat="drinks"><i class="fas fa-glass-water"></i> Drinks</button>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <div class="section-title" id="sectionTitle"><i class="fas fa-utensils" style="color:var(--gold)"></i> Our Menu</div>
+    <div class="menu-grid" id="menuGrid"></div>
+    <div class="no-results" id="noResults" style="display:none">
+      <i class="fas fa-search"></i><p>No dishes found. Try a different search.</p>
+    </div>
+  </div>
+
+  <!-- FEEDBACK FAB -->
+  <div class="feedback-fab-tooltip" id="fbTooltip">Share your experience!</div>
+  <div class="feedback-fab" id="feedbackFab" onclick="openFeedback()" onmouseenter="showFbTooltip()" onmouseleave="hideFbTooltip()">
+    <i class="fas fa-comments"></i>
+  </div>
+
+  <!-- FLOATING CART -->
+  <div class="cart-fab" id="cartFab" onclick="openCart()">
+    <i class="fas fa-shopping-bag"></i>
+    <div class="cart-count" id="cartCount">0</div>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-handle"></div>
+  <div class="cart-header">
+    <div class="cart-title"><i class="fas fa-shopping-bag" style="color:var(--gold);font-size:1rem;margin-right:8px"></i>Your Order</div>
+    <button class="cart-close" onclick="closeCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div id="cartContent"></div>
+</div>
+
+<!-- ORDER CONFIRMATION MODAL -->
+<div id="confirmOverlay">
+  <div class="confirm-modal" id="confirmModal">
+    <div class="confirm-header">
+      <img class="confirm-logo" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80" alt="Logo" onerror="this.style.display='none'" />
+      <div class="confirm-rest-name">99Times Square</div>
+      <div class="confirm-table-pill" id="confirmTablePill"><i class="fas fa-chair"></i> Table —</div>
+    </div>
+    <div class="confirm-title"><i class="fas fa-clipboard-check"></i> Order Confirmation</div>
+    <div class="timer-section" id="timerSection">
+      <div class="timer-ring-wrap">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+          <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(200,151,58,0.15)" stroke-width="5"/>
+          <circle id="timerCircle" cx="30" cy="30" r="26" fill="none" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <div class="timer-num" id="timerNum">60</div>
+      </div>
+      <div class="timer-text">
+        <strong id="timerLabel">Modify or cancel within 60s</strong>
+        <span>Order auto-confirms when timer ends</span>
+      </div>
+    </div>
+    <div class="confirm-title" style="padding-top:4px;font-size:0.95rem;"><i class="fas fa-list-ul"></i> Items Ordered</div>
+    <div class="confirm-items-wrap" id="confirmItemsList"></div>
+    <div class="confirm-total-bar">
+      <div>
+        <div class="ctb-label">Grand Total</div>
+        <div style="font-size:0.7rem;color:var(--text-light)" id="confirmItemCount">0 items</div>
+      </div>
+      <div class="ctb-amount" id="confirmTotal">₹0</div>
+    </div>
+    <div class="confirm-actions">
+      <button class="cbtn cbtn-modify" onclick="modifyOrder()"><i class="fas fa-edit"></i> Modify Order</button>
+      <button class="cbtn cbtn-cancel" onclick="cancelOrder()"><i class="fas fa-times-circle"></i> Cancel Order</button>
+      <button class="cbtn cbtn-confirm full-btn" id="confirmBtn" onclick="confirmOrder()">
+        <i class="fab fa-whatsapp" style="font-size:1.1rem"></i> Confirm &amp; Send on WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI FEEDBACK CHAT MODAL -->
+<div id="feedbackOverlay">
+  <div class="feedback-panel">
+    <div class="fb-header">
+      <div class="fb-avatar"><i class="fas fa-robot"></i></div>
+      <div class="fb-header-info">
+        <div class="fb-header-name">99Times Square — Feedback</div>
+        <div class="fb-header-status"><span class="fb-online-dot"></span> AI Assistant • Here to help</div>
+      </div>
+      <button class="fb-close-btn" onclick="closeFeedback()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="fb-messages" id="fbMessages"></div>
+    <div class="fb-quick-replies" id="fbQuickReplies"></div>
+    <div class="fb-input-area">
+      <textarea id="fbTextInput" placeholder="Type your message..." rows="1" onkeydown="fbHandleKey(event)" oninput="autoResizeFbInput(this)"></textarea>
+      <button class="fb-send-btn" onclick="fbSendUserMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// TABLE ENTRY
+// ════════════════════════════════════════════
+let tableNumber = '';
+
+function confirmTableEntry() {
+  const val = document.getElementById('tableInput').value.trim();
+  const errEl = document.getElementById('entryError');
+  const num = parseInt(val);
+  if (!val || isNaN(num) || num < 1 || num > 99) {
+    errEl.style.display = 'flex'; errEl.style.alignItems = 'center'; errEl.style.gap = '5px';
+    document.getElementById('tableInput').focus(); return;
+  }
+  errEl.style.display = 'none';
+  tableNumber = String(num);
+  document.getElementById('tableDisplay').textContent = 'Table ' + tableNumber;
+  const screen = document.getElementById('tableEntryScreen');
+  screen.style.transition = 'opacity 0.4s, transform 0.4s';
+  screen.style.opacity = '0'; screen.style.transform = 'scale(1.04)';
+  setTimeout(() => { screen.style.display = 'none'; document.getElementById('mainApp').style.display = 'block'; renderMenu(); }, 380);
+}
+
+document.getElementById('tableInput').addEventListener('keydown', e => { if (e.key === 'Enter') confirmTableEntry(); });
+
+function changeTable() {
+  if (!confirm('Change your table number? This will clear your current cart.')) return;
+  cart = []; updateCartBadge();
+  document.getElementById('mainApp').style.display = 'none';
+  const screen = document.getElementById('tableEntryScreen');
+  screen.style.opacity = '0'; screen.style.transform = 'scale(1.04)'; screen.style.display = 'flex';
+  requestAnimationFrame(() => { screen.style.transition = 'opacity 0.4s, transform 0.4s'; screen.style.opacity = '1'; screen.style.transform = 'scale(1)'; });
+  document.getElementById('tableInput').value = '';
+}
+
+// ════════════════════════════════════════════
+// MENU DATA
+// ════════════════════════════════════════════
+const menuItems = [
+  {id:1,name:'Paneer Tikka',desc:'Soft cottage cheese marinated in spiced yogurt, grilled to perfection',price:260,category:'starters',veg:true,bestseller:true,img:'https://images.unsplash.com/photo-1567337710282-00832b415979?w=400&q=80'},
+  {id:2,name:'Chicken Tikka',desc:'Tender chicken chunks marinated in aromatic spices, char-grilled',price:320,category:'starters',veg:false,bestseller:true,img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=80'},
+  {id:3,name:'Veg Spring Rolls',desc:'Crispy rolls stuffed with seasoned vegetables',price:180,category:'starters',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80'},
+  {id:4,name:'Hara Bhara Kabab',desc:'Green spinach-pea patties with spices, pan-fried',price:200,category:'starters',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80'},
+  {id:5,name:'Fish Amritsari',desc:'Crispy fried fish in tangy Amritsari batter',price:380,category:'starters',veg:false,bestseller:false,img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80'},
+  {id:6,name:'Butter Chicken',desc:'Juicy chicken in rich tomato-cream sauce, mildly spiced',price:360,category:'main',veg:false,bestseller:true,img:'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400&q=80'},
+  {id:7,name:'Dal Makhani',desc:'Black lentils slow-cooked overnight in butter and cream',price:280,category:'main',veg:true,bestseller:true,img:'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&q=80'},
+  {id:8,name:'Paneer Butter Masala',desc:'Soft paneer cubes in velvety tomato-cashew gravy',price:300,category:'main',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1627662168223-7df99068099a?w=400&q=80'},
+  {id:9,name:'Mutton Rogan Josh',desc:'Slow-braised mutton in Kashmiri spice blend',price:460,category:'main',veg:false,bestseller:false,img:'https://images.unsplash.com/photo-1545247181-516773cae754?w=400&q=80'},
+  {id:10,name:'Palak Paneer',desc:'Fresh cottage cheese in creamy spinach gravy',price:280,category:'main',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=80'},
+  {id:11,name:'Butter Naan',desc:'Soft leavened flatbread brushed with butter from clay oven',price:60,category:'breads',veg:true,bestseller:true,img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80'},
+  {id:12,name:'Garlic Naan',desc:'Naan topped with garlic and fresh coriander',price:70,category:'breads',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80'},
+  {id:13,name:'Lachha Paratha',desc:'Multi-layered whole wheat flatbread, flaky and crisp',price:65,category:'breads',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80'},
+  {id:14,name:'Chicken Biryani',desc:'Fragrant basmati rice layered with spiced chicken & saffron',price:420,category:'rice',veg:false,bestseller:true,img:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=80'},
+  {id:15,name:'Veg Biryani',desc:'Aromatic basmati with seasonal veggies and whole spices',price:320,category:'rice',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&q=80'},
+  {id:16,name:'Jeera Rice',desc:'Cumin-tempered steamed basmati rice',price:180,category:'rice',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1516684732162-798a0062be99?w=400&q=80'},
+  {id:17,name:'Gulab Jamun',desc:'Soft milk-solid dumplings soaked in rose-scented sugar syrup',price:120,category:'desserts',veg:true,bestseller:true,img:'https://images.unsplash.com/photo-1571167366136-b57e37571ba1?w=400&q=80'},
+  {id:18,name:'Gajar Ka Halwa',desc:'Slow-cooked carrot pudding with nuts and cardamom',price:150,category:'desserts',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80'},
+  {id:19,name:'Kulfi Falooda',desc:'Frozen saffron kulfi with rose syrup and vermicelli',price:160,category:'desserts',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80'},
+  {id:20,name:'Mango Lassi',desc:'Thick chilled yoghurt drink blended with Alphonso mango',price:120,category:'drinks',veg:true,bestseller:true,img:'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&q=80'},
+  {id:21,name:'Masala Chai',desc:'Spiced Indian tea brewed with ginger, cardamom and cinnamon',price:60,category:'drinks',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80'},
+  {id:22,name:'Fresh Lime Soda',desc:'Refreshing fizzy lemon drink, sweet or salted',price:80,category:'drinks',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1571950006183-1cdb3e0c8b18?w=400&q=80'},
+  {id:23,name:'Rose Sharbat',desc:'Cool rose-flavoured drink with basil seeds',price:90,category:'drinks',veg:true,bestseller:false,img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80'},
+];
+
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let cart = [];
+let activeCategory = 'all';
+let searchQuery = '';
+let confirmTimerInterval = null;
+let confirmAutoTimeout = null;
+let confirmSecondsLeft = 60;
+const CONFIRM_DURATION = 60;
+
+// ════════════════════════════════════════════
+// RENDER MENU
+// ════════════════════════════════════════════
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  const noResults = document.getElementById('noResults');
+  const q = searchQuery.toLowerCase();
+  const filtered = menuItems.filter(item => {
+    const catMatch = activeCategory === 'all' || item.category === activeCategory;
+    const searchMatch = !q || item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
+    return catMatch && searchMatch;
+  });
+  if (filtered.length === 0) { grid.innerHTML = ''; noResults.style.display = 'block'; return; }
+  noResults.style.display = 'none';
+  const catLabels = {all:'Our Full Menu',starters:'Starters & Snacks',main:'Main Course',breads:'Breads',rice:'Rice & Biryani',desserts:'Desserts',drinks:'Drinks & Beverages'};
+  document.getElementById('sectionTitle').innerHTML = `<i class="fas fa-utensils" style="color:var(--gold)"></i> ${catLabels[activeCategory]||'Menu'}`;
+  grid.innerHTML = filtered.map((item,i) => {
+    const cartItem = cart.find(c=>c.id===item.id);
+    const qty = cartItem ? cartItem.qty : 0;
+    const addBtn = qty > 0
+      ? `<div class="qty-control"><button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="qty-num">${qty}</span><button class="qty-btn" onclick="changeQty(${item.id},1)">+</button></div>`
+      : `<button class="add-btn" onclick="addToCart(${item.id})"><i class="fas fa-plus"></i> Add</button>`;
+    return `<div class="menu-card" style="animation-delay:${i*0.05}s">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80'" />
+        <div class="veg-badge ${item.veg?'veg':'nonveg'}"></div>
+        ${item.bestseller?'<div class="bestseller">⭐ Best</div>':''}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${item.name}</div>
+        <div class="card-desc">${item.desc}</div>
+        <div class="card-footer">
+          <div class="card-price">₹${item.price}<span>/plate</span></div>
+          <div id="btn-${item.id}">${addBtn}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════
+// CART LOGIC
+// ════════════════════════════════════════════
+function addToCart(id) {
+  const item = menuItems.find(i=>i.id===id);
+  const existing = cart.find(c=>c.id===id);
+  if (existing) existing.qty++; else cart.push({...item, qty:1});
+  updateCartBadge(); updateBtnState(id); animateFab(); showToast(`${item.name} added!`);
+}
+function changeQty(id, delta) {
+  const idx = cart.findIndex(c=>c.id===id);
+  if (idx===-1) return;
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx,1);
+  updateCartBadge(); updateBtnState(id); renderCartContent();
+}
+function removeFromCart(id) {
+  cart = cart.filter(c=>c.id!==id);
+  updateCartBadge(); updateBtnState(id); renderCartContent();
+}
+function updateBtnState(id) {
+  const wrap = document.getElementById('btn-'+id);
+  if (!wrap) return;
+  const cartItem = cart.find(c=>c.id===id);
+  const qty = cartItem ? cartItem.qty : 0;
+  if (qty > 0) {
+    wrap.innerHTML = `<div class="qty-control"><button class="qty-btn" onclick="changeQty(${id},-1)">−</button><span class="qty-num">${qty}</span><button class="qty-btn" onclick="changeQty(${id},1)">+</button></div>`;
+  } else {
+    wrap.innerHTML = `<button class="add-btn" onclick="addToCart(${id})"><i class="fas fa-plus"></i> Add</button>`;
+  }
+}
+function updateCartBadge() {
+  const total = cart.reduce((s,i)=>s+i.qty, 0);
+  const badge = document.getElementById('cartCount');
+  badge.textContent = total;
+  badge.classList.toggle('show', total > 0);
+}
+function getTotal() { return cart.reduce((s,i)=>s+i.price*i.qty, 0); }
+
+// ════════════════════════════════════════════
+// CART MODAL
+// ════════════════════════════════════════════
+function openCart() {
+  renderCartContent();
+  const overlay = document.getElementById('overlay');
+  const panel = document.getElementById('cartPanel');
+  overlay.classList.add('open');
+  setTimeout(() => overlay.classList.add('visible'), 10);
+  setTimeout(() => panel.classList.add('open'), 10);
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  const overlay = document.getElementById('overlay');
+  const panel = document.getElementById('cartPanel');
+  overlay.classList.remove('visible'); panel.classList.remove('open');
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+function renderCartContent() {
+  const container = document.getElementById('cartContent');
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p style="font-weight:600;margin-bottom:6px">Your cart is empty</p><p style="font-size:0.8rem">Browse our menu and add delicious items!</p></div><div class="action-btns"><button class="btn-waiter" onclick="callWaiter()"><i class="fas fa-concierge-bell"></i> Call Waiter</button></div>`;
+    return;
+  }
+  const itemsHtml = cart.map(item => `<div class="cart-item"><img class="ci-img" src="${item.img}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&q=80'" /><div class="ci-info"><div class="ci-name">${item.name}</div><div class="ci-price">₹${item.price} × ${item.qty} = <strong>₹${item.price*item.qty}</strong></div></div><div class="ci-controls"><button class="ci-qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="ci-qty">${item.qty}</span><button class="ci-qty-btn" onclick="changeQty(${item.id},1)">+</button><button class="ci-remove" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button></div></div>`).join('');
+  container.innerHTML = `<div class="order-summary-card"><div class="summary-header"><div class="summary-restaurant">99Times Square</div><div class="summary-table"><i class="fas fa-chair"></i> Table ${tableNumber}</div></div><div class="summary-divider">Order Details</div><div class="cart-items-list">${itemsHtml}</div></div><div class="summary-total"><div><div class="total-label">Total Amount</div><div style="font-size:0.72rem;color:var(--text-light)">${cart.reduce((s,i)=>s+i.qty,0)} item(s)</div></div><div class="total-amount">₹${getTotal()}</div></div><div class="action-btns"><button class="btn-order" onclick="placeOrder()"><i class="fab fa-whatsapp" style="font-size:1.2rem"></i> Place Order</button><button class="btn-waiter" onclick="callWaiter()"><i class="fas fa-concierge-bell"></i> Call Waiter</button></div>`;
+}
+
+// ════════════════════════════════════════════
+// ORDER FLOW
+// ════════════════════════════════════════════
+function placeOrder() {
+  if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+  closeCart();
+  setTimeout(() => openConfirmModal(), 400);
+}
+function openConfirmModal() {
+  document.getElementById('confirmTablePill').innerHTML = `<i class="fas fa-chair"></i> Table ${tableNumber}`;
+  const itemsHtml = cart.map(item => `<div class="confirm-item"><div class="ci-dot" style="background:${item.veg?'#27ae60':'#e74c3c'}"></div><div class="ci-iname">${item.name}</div><div class="ci-iqty">× ${item.qty}</div><div class="ci-iprice">₹${item.price*item.qty}</div></div>`).join('');
+  document.getElementById('confirmItemsList').innerHTML = itemsHtml;
+  const totalQty = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('confirmItemCount').textContent = `${totalQty} item${totalQty>1?'s':''}`;
+  document.getElementById('confirmTotal').textContent = `₹${getTotal()}`;
+  const overlay = document.getElementById('confirmOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => overlay.classList.add('visible'), 10);
+  document.body.style.overflow = 'hidden';
+  startConfirmTimer();
+}
+function closeConfirmModal() {
+  clearConfirmTimer();
+  const overlay = document.getElementById('confirmOverlay');
+  overlay.classList.remove('visible');
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+function startConfirmTimer() {
+  confirmSecondsLeft = CONFIRM_DURATION;
+  updateTimerDisplay();
+  confirmTimerInterval = setInterval(() => {
+    confirmSecondsLeft--;
+    updateTimerDisplay();
+    if (confirmSecondsLeft <= 0) { clearConfirmTimer(); autoConfirmOrder(); }
+  }, 1000);
+}
+function updateTimerDisplay() {
+  const numEl = document.getElementById('timerNum');
+  const labelEl = document.getElementById('timerLabel');
+  const circleEl = document.getElementById('timerCircle');
+  const sectionEl = document.getElementById('timerSection');
+  if (!numEl) return;
+  numEl.textContent = confirmSecondsLeft;
+  const circumference = 2 * Math.PI * 26;
+  circleEl.style.strokeDasharray = circumference;
+  circleEl.style.strokeDashoffset = circumference * (1 - confirmSecondsLeft / CONFIRM_DURATION);
+  labelEl.textContent = `Modify or cancel within ${confirmSecondsLeft}s`;
+  if (confirmSecondsLeft <= 15) { sectionEl.classList.add('timer-urgent'); } else { sectionEl.classList.remove('timer-urgent'); }
+}
+function clearConfirmTimer() { clearInterval(confirmTimerInterval); clearTimeout(confirmAutoTimeout); confirmTimerInterval = null; confirmAutoTimeout = null; }
+function modifyOrder() { closeConfirmModal(); setTimeout(() => openCart(), 400); }
+function cancelOrder() { closeConfirmModal(); cart = []; updateCartBadge(); renderMenu(); setTimeout(() => showToast('🚫 Order Cancelled'), 400); }
+function confirmOrder() { clearConfirmTimer(); sendWhatsApp(false); closeConfirmModal(); setTimeout(() => { cart = []; updateCartBadge(); renderMenu(); showToast('✅ Order sent successfully!'); }, 500); }
+function autoConfirmOrder() { sendWhatsApp(true); closeConfirmModal(); setTimeout(() => { cart = []; updateCartBadge(); renderMenu(); showToast('✅ Order auto-confirmed & sent!'); }, 500); }
+function sendWhatsApp(autoConfirmed=false) {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  const dateStr = now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  let msg = `🍽️ *New Order (CONFIRMED) from Table ${tableNumber}*\n📍 *Restaurant:* 99Times Square\n🕐 *Time:* ${dateStr}, ${timeStr}\n━━━━━━━━━━━━━━━━━━━\n*Items Ordered:*\n`;
+  cart.forEach(item => { msg += `• ${item.name} × ${item.qty}  —  ₹${item.price*item.qty}\n`; });
+  msg += `━━━━━━━━━━━━━━━━━━━\n💰 *Total: ₹${getTotal()}*\n`;
+  if (autoConfirmed) msg += `\n⏱️ _Order was auto-confirmed after 1-minute timer._\n`;
+  msg += `\n_Please confirm this order. Thank you!_ 🙏`;
+  window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`,'_blank');
+}
+function callWaiter() {
+  const msg = `🔔 Customer from *Table ${tableNumber}* is calling the waiter.\n\n_Please attend to Table ${tableNumber} at 99Times Square._`;
+  window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`,'_blank');
+  showToast('🔔 Waiter has been called!');
+}
+
+// ════════════════════════════════════════════
+// TOAST & FAB
+// ════════════════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+function animateFab() {
+  const fab = document.getElementById('cartFab');
+  fab.classList.remove('bounce'); void fab.offsetWidth; fab.classList.add('bounce');
+}
+
+// ════════════════════════════════════════════
+// CATEGORY + SEARCH
+// ════════════════════════════════════════════
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = btn.dataset.cat;
+    renderMenu();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderMenu(); });
+
+// ════════════════════════════════════════════
+// FEEDBACK FAB TOOLTIP
+// ════════════════════════════════════════════
+function showFbTooltip() { document.getElementById('fbTooltip').classList.add('show'); }
+function hideFbTooltip() { document.getElementById('fbTooltip').classList.remove('show'); }
+
+// ════════════════════════════════════════════
+// AI FEEDBACK CHAT SYSTEM
+// ════════════════════════════════════════════
+const WHATSAPP_NUMBER = '919392328600';
+const GOOGLE_REVIEW_URL = 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK'; // Replace with actual
+
+let fbConversationState = 'idle'; // idle, greeted, asked_experience, sentiment_captured, follow_up, done
+let fbSentiment = null; // 'happy' | 'unhappy' | 'busy'
+let fbMessageHistory = [];
+
+function openFeedback() {
+  const overlay = document.getElementById('feedbackOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => overlay.classList.add('visible'), 10);
+  document.body.style.overflow = 'hidden';
+  if (fbConversationState === 'idle') {
+    setTimeout(() => startFeedbackConversation(), 400);
+  }
+}
+
+function closeFeedback() {
+  const overlay = document.getElementById('feedbackOverlay');
+  overlay.classList.remove('visible');
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+
+function startFeedbackConversation() {
+  fbConversationState = 'greeted';
+  const greetMsg = `Hello! 👋 This is a quick follow-up from <strong>99Times Square</strong>. Thank you for visiting us today! 🙏`;
+  addBotMessage(greetMsg, () => {
+    setTimeout(() => {
+      fbConversationState = 'asked_experience';
+      addBotMessage('How was your experience with us today? 😊', () => {
+        setQuickReplies([
+          {label:'😊 Loved it!', action:()=>fbHandleSentiment('happy','Loved it!')},
+          {label:'😐 It was okay', action:()=>fbHandleSentiment('neutral','It was okay')},
+          {label:'😞 Not satisfied', action:()=>fbHandleSentiment('unhappy','Not satisfied')},
+          {label:'🏃 Busy now', action:()=>fbHandleSentiment('busy','I\'m busy right now')}
+        ]);
+      });
+    }, 800);
+  });
+}
+
+function fbHandleSentiment(sentiment, userText) {
+  clearQuickReplies();
+  addUserMessage(userText);
+  fbSentiment = sentiment;
+  fbConversationState = 'sentiment_captured';
+
+  if (sentiment === 'busy') {
+    setTimeout(() => {
+      addBotMessage(`No problem at all! 😊 Thank you for your time. Have a wonderful day ahead! 🌟`, () => {
+        fbConversationState = 'done';
+      });
+    }, 700);
+    return;
+  }
+
+  if (sentiment === 'happy' || sentiment === 'neutral') {
+    setTimeout(() => {
+      const msg = sentiment === 'happy'
+        ? `That's wonderful to hear! We're really glad you enjoyed your experience 😊🎉`
+        : `Thank you for letting us know! We always strive to do better for our guests.`;
+      addBotMessage(msg, () => {
+        setTimeout(() => {
+          addBotMessage(`It would mean a lot to us if you could leave a quick ⭐ review on Google. I'll send you the link right now!`, () => {
+            setTimeout(() => {
+              addBotMessageWithReviewLink();
+              fbConversationState = 'follow_up';
+              setTimeout(() => {
+                addBotMessage(`Thank you so much for your support! 🙏 Have a great day!`, () => {
+                  fbConversationState = 'done';
+                  setTimeout(() => {
+                    setQuickReplies([{label:'Close chat', action:closeFeedback}]);
+                  }, 500);
+                });
+              }, 1000);
+            }, 600);
+          });
+        }, 700);
+      });
+    }, 700);
+  }
+
+  if (sentiment === 'unhappy') {
+    setTimeout(() => {
+      addBotMessage(`I'm really sorry to hear that. 😔 Your feedback is very important to us and helps us improve.`, () => {
+        setTimeout(() => {
+          addBotMessage(`Could you please tell us what went wrong so we can make it right? 🙏`, () => {
+            fbConversationState = 'collecting_feedback';
+            setQuickReplies([
+              {label:'Food quality', action:()=>fbSelectFeedbackTopic('Food quality')},
+              {label:'Service was slow', action:()=>fbSelectFeedbackTopic('Service was slow')},
+              {label:'Cleanliness issue', action:()=>fbSelectFeedbackTopic('Cleanliness issue')},
+              {label:'Something else', action:()=>fbSelectFeedbackTopic(null)}
+            ]);
+          });
+        }, 700);
+      });
+    }, 700);
+  }
+}
+
+function fbSelectFeedbackTopic(topic) {
+  clearQuickReplies();
+  if (topic) {
+    addUserMessage(topic);
+    fbReceiveNegativeFeedback(topic);
+  } else {
+    addBotMessage(`Please go ahead and share what happened. I\'m listening carefully. 👂`);
+    fbConversationState = 'waiting_custom_feedback';
+  }
+}
+
+function fbReceiveNegativeFeedback(feedback) {
+  setTimeout(() => {
+    addBotMessage(`Thank you for sharing that. 🙏 We sincerely apologize for the inconvenience regarding <em>"${feedback}"</em>.`, () => {
+      setTimeout(() => {
+        addBotMessage(`We will definitely work on this and improve our service. Your feedback has been noted! 📝`, () => {
+          setTimeout(() => {
+            fbSendFeedbackToWhatsApp(feedback);
+            setTimeout(() => {
+              addBotMessage(`We've forwarded your feedback to our team. Someone will follow up with you. Have a good day! 🌟`, () => {
+                fbConversationState = 'done';
+                setTimeout(() => setQuickReplies([{label:'Close chat', action:closeFeedback}]), 500);
+              });
+            }, 800);
+          }, 700);
+        });
+      }, 600);
+    });
+  }, 700);
+}
+
+function fbSendFeedbackToWhatsApp(feedback) {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  const msg = `⚠️ *Customer Feedback Alert — 99Times Square*\n\n🪑 *Table:* ${tableNumber || 'Walk-in'}\n🕐 *Time:* ${timeStr}\n\n📝 *Feedback:* ${feedback}\n\n_Please follow up with this customer._ 🙏`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ════════════════════════════════════════════
+// FB CHAT HELPERS
+// ════════════════════════════════════════════
+function addBotMessage(html, callback) {
+  const messages = document.getElementById('fbMessages');
+  const typingId = 'typing_' + Date.now();
+
+  // Show typing indicator
+  const typingEl = document.createElement('div');
+  typingEl.className = 'fb-msg bot';
+  typingEl.id = typingId;
+  typingEl.innerHTML = `<div class="fb-msg-avatar bot"><i class="fas fa-robot"></i></div><div class="fb-bubble typing"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+  messages.appendChild(typingEl);
+  messages.scrollTop = messages.scrollHeight;
+
+  const delay = Math.min(html.length * 18, 1800) + 400;
+  setTimeout(() => {
+    typingEl.remove();
+    const msgEl = document.createElement('div');
+    msgEl.className = 'fb-msg bot';
+    msgEl.innerHTML = `<div class="fb-msg-avatar bot"><i class="fas fa-robot"></i></div><div class="fb-bubble">${html}</div>`;
+    messages.appendChild(msgEl);
+    messages.scrollTop = messages.scrollHeight;
+    fbMessageHistory.push({role:'bot', content:html});
+    if (callback) callback();
+  }, delay);
+}
+
+function addBotMessageWithReviewLink() {
+  const messages = document.getElementById('fbMessages');
+  const msgEl = document.createElement('div');
+  msgEl.className = 'fb-msg bot';
+  msgEl.innerHTML = `<div class="fb-msg-avatar bot"><i class="fas fa-robot"></i></div>
+    <div class="fb-bubble">
+      <a class="fb-review-link" href="${GOOGLE_REVIEW_URL}" target="_blank">
+        <i class="fab fa-google"></i>
+        <span>Leave us a 5-star Google Review ⭐⭐⭐⭐⭐</span>
+        <i class="fas fa-external-link-alt" style="font-size:0.75rem;opacity:0.8"></i>
+      </a>
+    </div>`;
+  messages.appendChild(msgEl);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function addUserMessage(text) {
+  const messages = document.getElementById('fbMessages');
+  const msgEl = document.createElement('div');
+  msgEl.className = 'fb-msg user';
+  msgEl.innerHTML = `<div class="fb-msg-avatar user-av"><i class="fas fa-user"></i></div><div class="fb-bubble">${text}</div>`;
+  messages.appendChild(msgEl);
+  messages.scrollTop = messages.scrollHeight;
+  fbMessageHistory.push({role:'user', content:text});
+}
+
+function setQuickReplies(options) {
+  const container = document.getElementById('fbQuickReplies');
+  container.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'fb-qr-btn';
+    btn.textContent = opt.label;
+    btn.onclick = () => { clearQuickReplies(); opt.action(); };
+    container.appendChild(btn);
+  });
+}
+
+function clearQuickReplies() {
+  document.getElementById('fbQuickReplies').innerHTML = '';
+}
+
+function fbSendUserMessage() {
+  const input = document.getElementById('fbTextInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  autoResizeFbInput(input);
+  addUserMessage(text);
+  clearQuickReplies();
+
+  // Handle based on state
+  if (fbConversationState === 'idle' || fbConversationState === 'greeted') {
+    startFeedbackConversation();
+    return;
+  }
+  if (fbConversationState === 'asked_experience') {
+    analyzeAndRespond(text);
+    return;
+  }
+  if (fbConversationState === 'waiting_custom_feedback' || fbConversationState === 'collecting_feedback') {
+    fbReceiveNegativeFeedback(text);
+    return;
+  }
+  if (fbConversationState === 'done') {
+    setTimeout(() => addBotMessage(`Thank you again! We hope to see you soon at 99Times Square 🍽️ Have a wonderful day!`), 500);
+    return;
+  }
+  // Generic fallback
+  setTimeout(() => addBotMessage(`Thank you for sharing that! Is there anything else you'd like to tell us? 😊`), 700);
+}
+
+function analyzeAndRespond(text) {
+  const lower = text.toLowerCase();
+  const positiveWords = ['good','great','excellent','amazing','loved','fantastic','wonderful','nice','perfect','enjoyed','delicious','awesome','best','superb','happy'];
+  const negativeWords = ['bad','worst','terrible','horrible','poor','disappointed','slow','rude','cold','dirty','overpriced','disappointed','never','awful','unpleasant'];
+  const busyWords = ['busy','later','not now','can\'t','can not','no time','hurry'];
+
+  if (busyWords.some(w => lower.includes(w))) {
+    fbHandleSentiment('busy', text);
+  } else if (positiveWords.some(w => lower.includes(w))) {
+    fbHandleSentiment('happy', text);
+  } else if (negativeWords.some(w => lower.includes(w))) {
+    fbHandleSentiment('unhappy', text);
+  } else {
+    fbHandleSentiment('neutral', text);
+  }
+}
+
+function fbHandleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    fbSendUserMessage();
+  }
+}
+
+function autoResizeFbInput(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+</script>
+</body>
+</html>
