@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>99Times Square — QR Menu</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADhAOEDASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAcBAgMFBgQI" />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 <style>
   :root {
@@ -29,11 +28,103 @@
   html{scroll-behavior:smooth}
   body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
+  /* ─── WELCOME SPLASH SCREEN ─── */
+  #welcomeSplash {
+    position:fixed;inset:0;z-index:2000;overflow:hidden;
+    background:#1a0a04;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .splash-bg {
+    position:absolute;inset:0;
+    background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80');
+    background-size:cover;background-position:center;
+    opacity:0;
+    animation: splashBgReveal 1s ease 0.3s forwards;
+  }
+  @keyframes splashBgReveal {
+    from { opacity:0; transform:scale(1.08); }
+    to   { opacity:0.18; transform:scale(1); }
+  }
+  .splash-overlay {
+    position:absolute;inset:0;
+    background: radial-gradient(ellipse at center, rgba(26,10,4,0.3) 0%, rgba(26,10,4,0.85) 100%);
+  }
+  .splash-content {
+    position:relative;z-index:3;text-align:center;padding:24px;
+    display:flex;flex-direction:column;align-items:center;
+    transform:translateY(80px);opacity:0;
+    animation: splashContentRise 1s cubic-bezier(.16,1,.3,1) 0.6s forwards;
+  }
+  @keyframes splashContentRise {
+    from { transform:translateY(80px);opacity:0; }
+    to   { transform:translateY(0);opacity:1; }
+  }
+  .splash-namasthe-img {
+    width:160px;height:160px;object-fit:contain;
+    filter:drop-shadow(0 0 40px rgba(200,151,58,0.5));
+    animation: namastePulse 2s ease-in-out 1.8s infinite alternate;
+  }
+  @keyframes namastePulse {
+    from { filter:drop-shadow(0 0 30px rgba(200,151,58,0.4)); transform:scale(1); }
+    to   { filter:drop-shadow(0 0 55px rgba(200,151,58,0.8)); transform:scale(1.04); }
+  }
+  .splash-namaste-text {
+    font-family:'Great Vibes',cursive;
+    font-size:4.5rem;color:var(--gold-light);
+    text-shadow:0 0 30px rgba(200,151,58,0.6),0 4px 20px rgba(0,0,0,0.5);
+    line-height:1;margin:12px 0 4px;
+    opacity:0;
+    animation: fadeInText 0.8s ease 1.4s forwards;
+  }
+  @keyframes fadeInText { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .splash-welcome-text {
+    color:rgba(255,255,255,0.75);font-size:0.8rem;letter-spacing:4px;
+    text-transform:uppercase;margin-bottom:20px;
+    opacity:0;animation: fadeInText 0.8s ease 1.8s forwards;
+  }
+  .splash-restaurant-name {
+    font-family:'Playfair Display',serif;
+    font-size:2.2rem;font-weight:700;line-height:1.15;
+    color:#fff;text-align:center;
+    text-shadow:0 2px 20px rgba(0,0,0,0.5);
+    min-height:120px;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    opacity:0;animation: fadeInText 0.5s ease 2.2s forwards;
+  }
+  .splash-restaurant-name .line1 { color:var(--gold-light); font-size:2.8rem; }
+  .splash-restaurant-name .line2 { font-size:1.3rem; font-weight:400; color:rgba(255,255,255,0.85); letter-spacing:2px; }
+  .splash-restaurant-name .line3 { font-size:1rem; font-weight:300; color:rgba(200,151,58,0.9); letter-spacing:3px; font-style:italic; }
+  .splash-divider {
+    display:flex;align-items:center;gap:10px;margin:18px 0;width:280px;
+    opacity:0;animation:fadeInText 0.8s ease 2.5s forwards;
+  }
+  .splash-divider span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .splash-divider i{color:var(--gold);font-size:0.8rem;}
+  .splash-enter-btn {
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:#1a120b;border:none;border-radius:50px;
+    padding:15px 40px;font-family:'Poppins',sans-serif;font-weight:700;
+    font-size:1rem;cursor:pointer;letter-spacing:1px;
+    box-shadow:0 8px 30px rgba(200,151,58,0.45);
+    transition:all 0.3s;display:flex;align-items:center;gap:10px;
+    opacity:0;animation:fadeInText 0.8s ease 3.2s forwards;
+  }
+  .splash-enter-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(200,151,58,0.6);}
+  .splash-note {
+    color:rgba(255,255,255,0.35);font-size:0.7rem;margin-top:16px;
+    opacity:0;animation:fadeInText 0.8s ease 3.6s forwards;
+  }
+  /* typing cursor effect */
+  .typing-cursor::after {
+    content:'|';animation:blink 0.7s step-end infinite;color:var(--gold);
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
   /* ─── TABLE ENTRY SCREEN ─── */
   #tableEntryScreen {
     position:fixed;inset:0;z-index:1000;
     background: linear-gradient(135deg, #1a120b 0%, #3d1f05 50%, #1a120b 100%);
-    display:flex;align-items:center;justify-content:center;padding:24px;
+    display:none;align-items:center;justify-content:center;padding:24px;
   }
   #tableEntryScreen::before {
     content:'';position:absolute;inset:0;
@@ -153,7 +244,6 @@
   .cart-close:hover{background:rgba(200,151,58,0.3);}
   .order-summary-card{margin:16px 16px 0;background:#fff;border-radius:var(--radius);border:1px solid rgba(200,151,58,0.2);box-shadow:0 6px 24px rgba(0,0,0,0.07);overflow:hidden;}
   .summary-header{background:linear-gradient(135deg,#1a120b,#3d1f05);padding:20px;text-align:center;}
-  .summary-logo{width:60px;height:60px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;margin:0 auto 10px;display:block;}
   .summary-restaurant{font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;}
   .summary-table{background:var(--gold);color:#1a120b;padding:3px 14px;border-radius:50px;font-size:0.75rem;font-weight:700;display:inline-block;margin-top:8px;}
   .summary-divider{display:flex;align-items:center;gap:8px;padding:0 20px;margin:14px 0 4px;color:var(--text-light);font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;}
@@ -228,6 +318,42 @@
   .cbtn-confirm:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.45);}
   .cbtn-confirm:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 
+  /* ─── WHATSAPP ORDER RESULT SCREEN ─── */
+  #whatsappResultOverlay{position:fixed;inset:0;z-index:700;background:rgba(10,6,3,0.82);backdrop-filter:blur(8px);display:none;opacity:0;transition:opacity 0.35s;align-items:center;justify-content:center;padding:20px;}
+  #whatsappResultOverlay.open{display:flex;}
+  #whatsappResultOverlay.visible{opacity:1;}
+  .wa-result-modal{background:#fff;border-radius:24px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.5);transform:scale(0.85) translateY(30px);transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);}
+  #whatsappResultOverlay.visible .wa-result-modal{transform:scale(1) translateY(0);}
+  .wa-result-header{background:linear-gradient(135deg,#25d366,#128c7e);padding:28px 20px 22px;text-align:center;}
+  .wa-result-icon{font-size:3rem;margin-bottom:10px;display:block;}
+  .wa-result-title{color:#fff;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;}
+  .wa-result-sub{color:rgba(255,255,255,0.8);font-size:0.82rem;margin-top:6px;}
+  .wa-result-table-pill{background:rgba(255,255,255,0.25);color:#fff;padding:4px 16px;border-radius:50px;font-size:0.75rem;font-weight:700;display:inline-block;margin-top:10px;}
+  .wa-order-items{padding:16px 20px 8px;}
+  .wa-order-item-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed rgba(200,151,58,0.15);font-size:0.85rem;}
+  .wa-order-item-row:last-child{border-bottom:none;}
+  .wa-order-item-name{font-weight:500;color:var(--dark);}
+  .wa-order-item-price{font-weight:700;color:var(--accent);}
+  .wa-total-row{margin:0 20px 16px;padding:12px 16px;background:linear-gradient(135deg,rgba(37,211,102,0.08),rgba(37,211,102,0.03));border-radius:12px;border:1px solid rgba(37,211,102,0.3);display:flex;align-items:center;justify-content:space-between;}
+  .wa-total-label{font-size:0.85rem;font-weight:600;color:var(--text-light);}
+  .wa-total-amount{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#128c7e;}
+  /* Cancel & Re-order buttons */
+  .wa-action-section{padding:0 20px 28px;display:flex;flex-direction:column;gap:10px;}
+  .wa-cancel-btn{background:rgba(231,76,60,0.07);color:#c0392b;border:2px solid rgba(231,76,60,0.35);border-radius:14px;padding:13px;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;cursor:pointer;transition:all 0.28s;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .wa-cancel-btn:hover{background:#e74c3c;color:#fff;border-color:#e74c3c;box-shadow:0 4px 16px rgba(231,76,60,0.35);}
+  .wa-reorder-btn{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;border:none;border-radius:14px;padding:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.28s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 16px rgba(200,151,58,0.35);}
+  .wa-reorder-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,151,58,0.5);}
+  /* Cancelled info box */
+  .wa-cancelled-box{display:none;background:rgba(231,76,60,0.08);border:2px solid rgba(231,76,60,0.35);border-radius:12px;padding:14px 16px;text-align:center;animation:fadeInUp 0.4s ease;}
+  .wa-cancelled-box.show{display:block;}
+  .wa-cancelled-box-icon{font-size:1.4rem;display:block;margin-bottom:6px;}
+  .wa-cancelled-box-text{color:#c0392b;font-weight:700;font-size:0.92rem;margin-bottom:4px;}
+  .wa-cancelled-box-sub{color:#e74c3c;font-size:0.78rem;}
+  /* thank you banner */
+  .wa-thankyou-banner{display:none;background:linear-gradient(135deg,rgba(37,211,102,0.08),rgba(37,211,102,0.03));border:2px solid rgba(37,211,102,0.3);border-radius:12px;padding:14px 16px;text-align:center;animation:fadeInUp 0.4s ease;}
+  .wa-thankyou-banner.show{display:block;}
+  .wa-thankyou-banner-text{color:#128c7e;font-weight:700;font-size:0.95rem;}
+
   /* ─── AI FEEDBACK CHAT MODAL ─── */
   #feedbackOverlay{position:fixed;inset:0;z-index:600;background:rgba(10,6,3,0.8);backdrop-filter:blur(8px);display:none;opacity:0;transition:opacity 0.35s;align-items:flex-end;justify-content:center;}
   #feedbackOverlay.open{display:flex;}
@@ -274,15 +400,6 @@
   .fb-review-link:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(66,133,244,0.4);}
   .fb-review-link i{font-size:1.2rem;}
   .fb-review-link span{font-size:0.82rem;font-weight:600;}
-  .fb-sentiment-bar{display:flex;gap:8px;padding:6px 0;}
-  .fb-sentiment-btn{flex:1;padding:10px;border-radius:12px;border:2px solid;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column;align-items:center;gap:4px;}
-  .fb-sentiment-btn.happy{border-color:#27ae60;color:#27ae60;background:rgba(39,174,96,0.06);}
-  .fb-sentiment-btn.happy:hover,.fb-sentiment-btn.happy.selected{background:#27ae60;color:#fff;}
-  .fb-sentiment-btn.neutral{border-color:var(--gold);color:#8a6a2a;background:rgba(200,151,58,0.06);}
-  .fb-sentiment-btn.neutral:hover,.fb-sentiment-btn.neutral.selected{background:var(--gold);color:#1a120b;}
-  .fb-sentiment-btn.unhappy{border-color:#e74c3c;color:#e74c3c;background:rgba(231,76,60,0.06);}
-  .fb-sentiment-btn.unhappy:hover,.fb-sentiment-btn.unhappy.selected{background:#e74c3c;color:#fff;}
-  .fb-sentiment-btn .fb-emoji{font-size:1.4rem;}
 
   /* ─── TOAST ─── */
   .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:#1a120b;color:#fff;padding:12px 24px;border-radius:50px;font-size:0.85rem;font-weight:500;z-index:999;transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);display:flex;align-items:center;gap:8px;border:1px solid var(--gold);box-shadow:0 8px 28px rgba(0,0,0,0.3);white-space:nowrap;}
@@ -293,7 +410,6 @@
   @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   @keyframes fadeInLeft{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
   @keyframes cartBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}70%{transform:scale(0.95)}}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,0.4)}50%{box-shadow:0 0 0 8px rgba(231,76,60,0)}}
   @media(min-width:768px){.cart-panel{max-width:480px;left:auto;right:0;border-radius:24px 0 0 24px;max-height:100vh;}.feedback-panel{border-radius:24px;height:85vh;margin-bottom:24px;}.hero{padding-bottom:40px;}.restaurant-name{font-size:2.4rem;}}
   @media(min-width:1024px){.menu-section{padding:30px 40px 120px;}.controls{padding:20px 40px 0;}}
 </style>
@@ -302,14 +418,43 @@
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Added to cart!</span></div>
 
+<!-- ═══════════════════════════════════ -->
+<!-- WELCOME SPLASH SCREEN              -->
+<!-- ═══════════════════════════════════ -->
+<div id="welcomeSplash">
+  <div class="splash-bg"></div>
+  <div class="splash-overlay"></div>
+  <div class="splash-content">
+    <!-- Namaste image uploaded by user -->
+    <img class="splash-namasthe-img"
+         src="/mnt/user-data/uploads/1776923433587_image.png"
+         alt="Namaste"
+         onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80';this.style.borderRadius='50%';" />
+    <div class="splash-namaste-text">Namaste 🙏</div>
+    <div class="splash-welcome-text">Welcome to</div>
+    <div class="splash-restaurant-name">
+      <span class="line1" id="typingLine1"></span>
+      <span class="line2" id="typingLine2"></span>
+      <span class="line3" id="typingLine3"></span>
+    </div>
+    <div class="splash-divider">
+      <span></span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span></span>
+    </div>
+    <button class="splash-enter-btn" id="splashEnterBtn" onclick="hideSplash()" style="display:none;">
+      <i class="fas fa-utensils"></i> Explore Our Menu
+    </button>
+    <div class="splash-note" id="splashNote" style="display:none;"><i class="fas fa-chair" style="margin-right:4px"></i>Tap to enter & select your table</div>
+  </div>
+</div>
+
 <!-- TABLE ENTRY SCREEN -->
-<div id="tableEntryScreen">
+<div id="tableEntryScreen" style="display:flex;">
   <div class="entry-card">
     <div class="entry-logo-ring">
       <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80" alt="Restaurant Logo" onerror="this.style.display='none'" />
     </div>
     <div class="entry-title">99Times Square</div>
-    <div class="entry-subtitle">✦ Authentic Indian Cuisine ✦</div>
+    <div class="entry-subtitle">✦ Multi Cuisine Restaurant ✦</div>
     <div class="entry-label"><i class="fas fa-chair" style="color:var(--gold);margin-right:6px"></i>Enter your table number</div>
     <div class="entry-input-wrap">
       <i class="fas fa-hashtag"></i>
@@ -339,7 +484,7 @@
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&q=80" alt="Restaurant Logo" onerror="this.style.display='none'" />
       </div>
       <div class="restaurant-name">99Times Square</div>
-      <div class="restaurant-tagline">✦ Authentic Indian Cuisine ✦</div>
+      <div class="restaurant-tagline">✦ Multi Cuisine Restaurant ✦</div>
     </div>
     <div class="hero-divider">
       <span></span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><span></span>
@@ -435,6 +580,52 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════ -->
+<!-- WHATSAPP ORDER RESULT MODAL           -->
+<!-- Shows after WhatsApp opens            -->
+<!-- ═══════════════════════════════════════ -->
+<div id="whatsappResultOverlay">
+  <div class="wa-result-modal">
+    <div class="wa-result-header">
+      <span class="wa-result-icon">🎉</span>
+      <div class="wa-result-title">Order Sent!</div>
+      <div class="wa-result-sub">Your order has been sent to the kitchen via WhatsApp</div>
+      <div class="wa-result-table-pill" id="waResultTablePill"><i class="fas fa-chair"></i> Table —</div>
+    </div>
+
+    <!-- Thank you auto-message banner -->
+    <div class="wa-thankyou-banner" id="waThankyouBanner" style="margin:16px 20px 0;">
+      <div style="font-size:1.5rem;margin-bottom:4px;">😊</div>
+      <div class="wa-thankyou-banner-text">Thank you for ordering with us! 😊</div>
+      <div style="font-size:0.75rem;color:#128c7e;margin-top:4px;">We're preparing your delicious meal!</div>
+    </div>
+
+    <!-- Order items list -->
+    <div class="wa-order-items" id="waOrderItems"></div>
+    <div class="wa-total-row">
+      <div class="wa-total-label">Total Paid</div>
+      <div class="wa-total-amount" id="waOrderTotal">₹0</div>
+    </div>
+
+    <!-- Cancelled info box (hidden initially) -->
+    <div class="wa-cancelled-box" id="waCancelledBox" style="margin:0 20px 14px;">
+      <span class="wa-cancelled-box-icon">🚫</span>
+      <div class="wa-cancelled-box-text">Customer Cancelled This Order</div>
+      <div class="wa-cancelled-box-sub">Your cancellation has been noted. We're sorry to see you go!</div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="wa-action-section">
+      <button class="wa-cancel-btn" id="waCancelBtn" onclick="handleWaCancel()">
+        <i class="fas fa-times-circle"></i> Cancel Order
+      </button>
+      <button class="wa-reorder-btn" onclick="handleWaReorder()">
+        <i class="fas fa-redo"></i> Re-Order / Back to Menu
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- AI FEEDBACK CHAT MODAL -->
 <div id="feedbackOverlay">
   <div class="feedback-panel">
@@ -457,6 +648,74 @@
 
 <script>
 // ════════════════════════════════════════════
+// SPLASH SCREEN + TYPING EFFECT
+// ════════════════════════════════════════════
+const splashLines = [
+  { el: 'typingLine1', text: '99 TIMES SQUARE', speed: 80, cls: 'line1' },
+  { el: 'typingLine2', text: 'MULTI CUISINE RESTAURANT', speed: 55, cls: 'line2' },
+  { el: 'typingLine3', text: '— Taste Beyond Borders —', speed: 50, cls: 'line3' },
+];
+
+function typeText(elId, text, speed, onDone) {
+  const el = document.getElementById(elId);
+  el.classList.add('typing-cursor');
+  let i = 0;
+  const timer = setInterval(() => {
+    el.textContent += text[i++];
+    if (i >= text.length) {
+      clearInterval(timer);
+      el.classList.remove('typing-cursor');
+      if (onDone) setTimeout(onDone, 300);
+    }
+  }, speed);
+}
+
+function startTypingSequence() {
+  const delay = 2800; // wait for animations
+  setTimeout(() => {
+    typeText(splashLines[0].el, splashLines[0].text, splashLines[0].speed, () => {
+      setTimeout(() => {
+        typeText(splashLines[1].el, splashLines[1].text, splashLines[1].speed, () => {
+          setTimeout(() => {
+            typeText(splashLines[2].el, splashLines[2].text, splashLines[2].speed, () => {
+              // Show button after typing done
+              setTimeout(() => {
+                document.getElementById('splashEnterBtn').style.display = 'flex';
+                document.getElementById('splashNote').style.display = 'block';
+                document.getElementById('splashEnterBtn').style.animation = 'fadeInText 0.7s ease forwards';
+                document.getElementById('splashNote').style.animation = 'fadeInText 0.7s ease 0.3s forwards';
+                document.getElementById('splashEnterBtn').style.opacity = '0';
+                document.getElementById('splashNote').style.opacity = '0';
+              }, 300);
+            });
+          }, 400);
+        });
+      }, 400);
+    });
+  }, delay);
+}
+
+function hideSplash() {
+  const splash = document.getElementById('welcomeSplash');
+  splash.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  splash.style.opacity = '0';
+  splash.style.transform = 'scale(1.04)';
+  setTimeout(() => {
+    splash.style.display = 'none';
+    const tableScreen = document.getElementById('tableEntryScreen');
+    tableScreen.style.display = 'flex';
+    tableScreen.style.opacity = '0';
+    setTimeout(() => { tableScreen.style.transition = 'opacity 0.4s'; tableScreen.style.opacity = '1'; }, 10);
+  }, 480);
+}
+
+// Start splash on load — table entry screen hidden behind splash
+window.addEventListener('load', () => {
+  document.getElementById('tableEntryScreen').style.display = 'none';
+  startTypingSequence();
+});
+
+// ════════════════════════════════════════════
 // TABLE ENTRY
 // ════════════════════════════════════════════
 let tableNumber = '';
@@ -478,7 +737,10 @@ function confirmTableEntry() {
   setTimeout(() => { screen.style.display = 'none'; document.getElementById('mainApp').style.display = 'block'; renderMenu(); }, 380);
 }
 
-document.getElementById('tableInput').addEventListener('keydown', e => { if (e.key === 'Enter') confirmTableEntry(); });
+document.addEventListener('DOMContentLoaded', () => {
+  const ti = document.getElementById('tableInput');
+  if (ti) ti.addEventListener('keydown', e => { if (e.key === 'Enter') confirmTableEntry(); });
+});
 
 function changeTable() {
   if (!confirm('Change your table number? This will clear your current cart.')) return;
@@ -529,6 +791,7 @@ let confirmTimerInterval = null;
 let confirmAutoTimeout = null;
 let confirmSecondsLeft = 60;
 const CONFIRM_DURATION = 60;
+let lastOrderSnapshot = []; // stores cart at time of order
 
 // ════════════════════════════════════════════
 // RENDER MENU
@@ -607,7 +870,9 @@ function updateCartBadge() {
   badge.textContent = total;
   badge.classList.toggle('show', total > 0);
 }
-function getTotal() { return cart.reduce((s,i)=>s+i.price*i.qty, 0); }
+function getTotal(cartArr) {
+  return (cartArr || cart).reduce((s,i)=>s+i.price*i.qty, 0);
+}
 
 // ════════════════════════════════════════════
 // CART MODAL
@@ -688,9 +953,88 @@ function updateTimerDisplay() {
 }
 function clearConfirmTimer() { clearInterval(confirmTimerInterval); clearTimeout(confirmAutoTimeout); confirmTimerInterval = null; confirmAutoTimeout = null; }
 function modifyOrder() { closeConfirmModal(); setTimeout(() => openCart(), 400); }
-function cancelOrder() { closeConfirmModal(); cart = []; updateCartBadge(); renderMenu(); setTimeout(() => showToast('🚫 Order Cancelled'), 400); }
-function confirmOrder() { clearConfirmTimer(); sendWhatsApp(false); closeConfirmModal(); setTimeout(() => { cart = []; updateCartBadge(); renderMenu(); showToast('✅ Order sent successfully!'); }, 500); }
-function autoConfirmOrder() { sendWhatsApp(true); closeConfirmModal(); setTimeout(() => { cart = []; updateCartBadge(); renderMenu(); showToast('✅ Order auto-confirmed & sent!'); }, 500); }
+function cancelOrder() {
+  closeConfirmModal();
+  cart = []; updateCartBadge(); renderMenu();
+  setTimeout(() => showToast('🚫 Order Cancelled'), 400);
+}
+function confirmOrder() {
+  clearConfirmTimer();
+  lastOrderSnapshot = cart.map(i => ({...i})); // snapshot
+  sendWhatsApp(false);
+  closeConfirmModal();
+  setTimeout(() => {
+    cart = []; updateCartBadge(); renderMenu();
+    openWaResultModal(lastOrderSnapshot);
+  }, 500);
+}
+function autoConfirmOrder() {
+  lastOrderSnapshot = cart.map(i => ({...i}));
+  sendWhatsApp(true);
+  closeConfirmModal();
+  setTimeout(() => {
+    cart = []; updateCartBadge(); renderMenu();
+    openWaResultModal(lastOrderSnapshot);
+  }, 500);
+}
+
+// ════════════════════════════════════════════
+// WHATSAPP RESULT MODAL
+// ════════════════════════════════════════════
+function openWaResultModal(orderSnapshot) {
+  document.getElementById('waResultTablePill').innerHTML = `<i class="fas fa-chair"></i> Table ${tableNumber}`;
+  // Populate items
+  const itemsHtml = orderSnapshot.map(item => `
+    <div class="wa-order-item-row">
+      <span class="wa-order-item-name">${item.name} × ${item.qty}</span>
+      <span class="wa-order-item-price">₹${item.price * item.qty}</span>
+    </div>`).join('');
+  document.getElementById('waOrderItems').innerHTML = itemsHtml;
+  document.getElementById('waOrderTotal').textContent = `₹${getTotal(orderSnapshot)}`;
+
+  // Reset state
+  document.getElementById('waCancelledBox').classList.remove('show');
+  document.getElementById('waThankyouBanner').classList.remove('show');
+  document.getElementById('waCancelBtn').style.display = 'flex';
+
+  const overlay = document.getElementById('whatsappResultOverlay');
+  overlay.classList.add('open');
+  setTimeout(() => overlay.classList.add('visible'), 10);
+  document.body.style.overflow = 'hidden';
+
+  // Auto show thank you message after 10 seconds
+  setTimeout(() => {
+    document.getElementById('waThankyouBanner').classList.add('show');
+    // After 10 more seconds, go to menu
+    setTimeout(() => {
+      closeWaResultModal();
+      setTimeout(() => showToast('😊 Thank you for ordering with us!'), 300);
+    }, 10000);
+  }, 10000);
+}
+
+function closeWaResultModal() {
+  const overlay = document.getElementById('whatsappResultOverlay');
+  overlay.classList.remove('visible');
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
+}
+
+function handleWaCancel() {
+  // Show cancelled info box in red
+  document.getElementById('waCancelledBox').classList.add('show');
+  // Hide cancel button
+  document.getElementById('waCancelBtn').style.display = 'none';
+  // Send cancellation WA message
+  const msg = `🚫 *Order Cancellation — Table ${tableNumber}*\n\n📍 *Restaurant:* 99Times Square\n🕐 *Time:* ${new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}\n\n_Customer has cancelled their order from Table ${tableNumber}. Please note!_ 🙏`;
+  window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function handleWaReorder() {
+  closeWaResultModal();
+  // Go to menu (already on menu since cart was cleared)
+  setTimeout(() => showToast('Browse our menu & add items 🍽️'), 400);
+}
+
 function sendWhatsApp(autoConfirmed=false) {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
@@ -702,6 +1046,7 @@ function sendWhatsApp(autoConfirmed=false) {
   msg += `\n_Please confirm this order. Thank you!_ 🙏`;
   window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`,'_blank');
 }
+
 function callWaiter() {
   const msg = `🔔 Customer from *Table ${tableNumber}* is calling the waiter.\n\n_Please attend to Table ${tableNumber} at 99Times Square._`;
   window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`,'_blank');
@@ -747,10 +1092,10 @@ function hideFbTooltip() { document.getElementById('fbTooltip').classList.remove
 // AI FEEDBACK CHAT SYSTEM
 // ════════════════════════════════════════════
 const WHATSAPP_NUMBER = '919392328600';
-const GOOGLE_REVIEW_URL = 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK'; // Replace with actual
+const GOOGLE_REVIEW_URL = 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK';
 
-let fbConversationState = 'idle'; // idle, greeted, asked_experience, sentiment_captured, follow_up, done
-let fbSentiment = null; // 'happy' | 'unhappy' | 'busy'
+let fbConversationState = 'idle';
+let fbSentiment = null;
 let fbMessageHistory = [];
 
 function openFeedback() {
@@ -771,8 +1116,7 @@ function closeFeedback() {
 
 function startFeedbackConversation() {
   fbConversationState = 'greeted';
-  const greetMsg = `Hello! 👋 This is a quick follow-up from <strong>99Times Square</strong>. Thank you for visiting us today! 🙏`;
-  addBotMessage(greetMsg, () => {
+  addBotMessage(`Hello! 👋 This is a quick follow-up from <strong>99Times Square</strong>. Thank you for visiting us today! 🙏`, () => {
     setTimeout(() => {
       fbConversationState = 'asked_experience';
       addBotMessage('How was your experience with us today? 😊', () => {
@@ -795,9 +1139,7 @@ function fbHandleSentiment(sentiment, userText) {
 
   if (sentiment === 'busy') {
     setTimeout(() => {
-      addBotMessage(`No problem at all! 😊 Thank you for your time. Have a wonderful day ahead! 🌟`, () => {
-        fbConversationState = 'done';
-      });
+      addBotMessage(`No problem at all! 😊 Thank you for your time. Have a wonderful day ahead! 🌟`, () => { fbConversationState = 'done'; });
     }, 700);
     return;
   }
@@ -809,16 +1151,14 @@ function fbHandleSentiment(sentiment, userText) {
         : `Thank you for letting us know! We always strive to do better for our guests.`;
       addBotMessage(msg, () => {
         setTimeout(() => {
-          addBotMessage(`It would mean a lot to us if you could leave a quick ⭐ review on Google. I'll send you the link right now!`, () => {
+          addBotMessage(`It would mean a lot to us if you could leave a quick ⭐ review on Google!`, () => {
             setTimeout(() => {
               addBotMessageWithReviewLink();
               fbConversationState = 'follow_up';
               setTimeout(() => {
                 addBotMessage(`Thank you so much for your support! 🙏 Have a great day!`, () => {
                   fbConversationState = 'done';
-                  setTimeout(() => {
-                    setQuickReplies([{label:'Close chat', action:closeFeedback}]);
-                  }, 500);
+                  setTimeout(() => { setQuickReplies([{label:'Close chat', action:closeFeedback}]); }, 500);
                 });
               }, 1000);
             }, 600);
@@ -849,20 +1189,15 @@ function fbHandleSentiment(sentiment, userText) {
 
 function fbSelectFeedbackTopic(topic) {
   clearQuickReplies();
-  if (topic) {
-    addUserMessage(topic);
-    fbReceiveNegativeFeedback(topic);
-  } else {
-    addBotMessage(`Please go ahead and share what happened. I\'m listening carefully. 👂`);
-    fbConversationState = 'waiting_custom_feedback';
-  }
+  if (topic) { addUserMessage(topic); fbReceiveNegativeFeedback(topic); }
+  else { addBotMessage(`Please go ahead and share what happened. I\'m listening carefully. 👂`); fbConversationState = 'waiting_custom_feedback'; }
 }
 
 function fbReceiveNegativeFeedback(feedback) {
   setTimeout(() => {
     addBotMessage(`Thank you for sharing that. 🙏 We sincerely apologize for the inconvenience regarding <em>"${feedback}"</em>.`, () => {
       setTimeout(() => {
-        addBotMessage(`We will definitely work on this and improve our service. Your feedback has been noted! 📝`, () => {
+        addBotMessage(`We will definitely work on this and improve. Your feedback has been noted! 📝`, () => {
           setTimeout(() => {
             fbSendFeedbackToWhatsApp(feedback);
             setTimeout(() => {
@@ -885,21 +1220,14 @@ function fbSendFeedbackToWhatsApp(feedback) {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ════════════════════════════════════════════
-// FB CHAT HELPERS
-// ════════════════════════════════════════════
 function addBotMessage(html, callback) {
   const messages = document.getElementById('fbMessages');
   const typingId = 'typing_' + Date.now();
-
-  // Show typing indicator
   const typingEl = document.createElement('div');
-  typingEl.className = 'fb-msg bot';
-  typingEl.id = typingId;
+  typingEl.className = 'fb-msg bot'; typingEl.id = typingId;
   typingEl.innerHTML = `<div class="fb-msg-avatar bot"><i class="fas fa-robot"></i></div><div class="fb-bubble typing"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
   messages.appendChild(typingEl);
   messages.scrollTop = messages.scrollHeight;
-
   const delay = Math.min(html.length * 18, 1800) + 400;
   setTimeout(() => {
     typingEl.remove();
@@ -944,75 +1272,40 @@ function setQuickReplies(options) {
   container.innerHTML = '';
   options.forEach(opt => {
     const btn = document.createElement('button');
-    btn.className = 'fb-qr-btn';
-    btn.textContent = opt.label;
+    btn.className = 'fb-qr-btn'; btn.textContent = opt.label;
     btn.onclick = () => { clearQuickReplies(); opt.action(); };
     container.appendChild(btn);
   });
 }
 
-function clearQuickReplies() {
-  document.getElementById('fbQuickReplies').innerHTML = '';
-}
+function clearQuickReplies() { document.getElementById('fbQuickReplies').innerHTML = ''; }
 
 function fbSendUserMessage() {
   const input = document.getElementById('fbTextInput');
   const text = input.value.trim();
   if (!text) return;
-  input.value = '';
-  autoResizeFbInput(input);
-  addUserMessage(text);
-  clearQuickReplies();
-
-  // Handle based on state
-  if (fbConversationState === 'idle' || fbConversationState === 'greeted') {
-    startFeedbackConversation();
-    return;
-  }
-  if (fbConversationState === 'asked_experience') {
-    analyzeAndRespond(text);
-    return;
-  }
-  if (fbConversationState === 'waiting_custom_feedback' || fbConversationState === 'collecting_feedback') {
-    fbReceiveNegativeFeedback(text);
-    return;
-  }
-  if (fbConversationState === 'done') {
-    setTimeout(() => addBotMessage(`Thank you again! We hope to see you soon at 99Times Square 🍽️ Have a wonderful day!`), 500);
-    return;
-  }
-  // Generic fallback
+  input.value = ''; autoResizeFbInput(input);
+  addUserMessage(text); clearQuickReplies();
+  if (fbConversationState === 'idle' || fbConversationState === 'greeted') { startFeedbackConversation(); return; }
+  if (fbConversationState === 'asked_experience') { analyzeAndRespond(text); return; }
+  if (fbConversationState === 'waiting_custom_feedback' || fbConversationState === 'collecting_feedback') { fbReceiveNegativeFeedback(text); return; }
+  if (fbConversationState === 'done') { setTimeout(() => addBotMessage(`Thank you again! We hope to see you soon at 99Times Square 🍽️`), 500); return; }
   setTimeout(() => addBotMessage(`Thank you for sharing that! Is there anything else you'd like to tell us? 😊`), 700);
 }
 
 function analyzeAndRespond(text) {
   const lower = text.toLowerCase();
-  const positiveWords = ['good','great','excellent','amazing','loved','fantastic','wonderful','nice','perfect','enjoyed','delicious','awesome','best','superb','happy'];
-  const negativeWords = ['bad','worst','terrible','horrible','poor','disappointed','slow','rude','cold','dirty','overpriced','disappointed','never','awful','unpleasant'];
-  const busyWords = ['busy','later','not now','can\'t','can not','no time','hurry'];
-
-  if (busyWords.some(w => lower.includes(w))) {
-    fbHandleSentiment('busy', text);
-  } else if (positiveWords.some(w => lower.includes(w))) {
-    fbHandleSentiment('happy', text);
-  } else if (negativeWords.some(w => lower.includes(w))) {
-    fbHandleSentiment('unhappy', text);
-  } else {
-    fbHandleSentiment('neutral', text);
-  }
+  const pos = ['good','great','excellent','amazing','loved','fantastic','wonderful','nice','perfect','enjoyed','delicious','awesome','best','superb','happy'];
+  const neg = ['bad','worst','terrible','horrible','poor','disappointed','slow','rude','cold','dirty','overpriced','awful','unpleasant'];
+  const busy = ['busy','later','not now','can\'t','no time','hurry'];
+  if (busy.some(w=>lower.includes(w))) fbHandleSentiment('busy',text);
+  else if (pos.some(w=>lower.includes(w))) fbHandleSentiment('happy',text);
+  else if (neg.some(w=>lower.includes(w))) fbHandleSentiment('unhappy',text);
+  else fbHandleSentiment('neutral',text);
 }
 
-function fbHandleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    fbSendUserMessage();
-  }
-}
-
-function autoResizeFbInput(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
-}
+function fbHandleKey(e) { if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); fbSendUserMessage(); } }
+function autoResizeFbInput(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; }
 </script>
 </body>
 </html>
