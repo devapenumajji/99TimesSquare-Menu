@@ -59,11 +59,14 @@
     from { transform:translateY(80px);opacity:0; }
     to   { transform:translateY(0);opacity:1; }
   }
-  .splash-namasthe-img {
-    width:160px;height:160px;object-fit:contain;
-    filter:drop-shadow(0 0 40px rgba(200,151,58,0.5));
-    animation: namastePulse 2s ease-in-out 1.8s infinite alternate;
-  }
+ .splash-namasthe-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover; /* better for circle */
+  border-radius: 50%; /* makes it a circle */
+  filter: drop-shadow(0 0 40px rgba(200,151,58,0.5));
+  animation: namastePulse 2s ease-in-out 1.8s infinite alternate;
+}
   @keyframes namastePulse {
     from { filter:drop-shadow(0 0 30px rgba(200,151,58,0.4)); transform:scale(1); }
     to   { filter:drop-shadow(0 0 55px rgba(200,151,58,0.8)); transform:scale(1.04); }
@@ -393,6 +396,59 @@
   @keyframes cartBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}70%{transform:scale(0.95)}}
   @media(min-width:768px){.cart-panel{max-width:480px;left:auto;right:0;border-radius:24px 0 0 24px;max-height:100vh;}.feedback-panel{border-radius:24px;height:85vh;margin-bottom:24px;}.hero{padding-bottom:40px;}.restaurant-name{font-size:2.4rem;}}
   @media(min-width:1024px){.menu-section{padding:30px 40px 120px;}.controls{padding:20px 40px 0;}}
+
+
+  .namaste-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-namasthe-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 2;
+  position: relative;
+}
+
+/* 🔥 Animated Glow Ring */
+.namaste-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: conic-gradient(
+    rgba(200,151,58,0.9),
+    rgba(255,215,120,0.4),
+    rgba(200,151,58,0.9)
+  );
+  animation: rotateRing 3s linear infinite;
+  filter: blur(8px);
+  z-index: 1;
+}
+
+/* Inner dark layer for clean ring look */
+.namaste-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 165px;
+  height: 165px;
+  background: #000; /* match your background */
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Rotation Animation */
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -406,10 +462,13 @@
   <div class="splash-bg"></div>
   <div class="splash-overlay"></div>
   <div class="splash-content">
-    <img class="splash-namasthe-img"
-         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=80"
+    <div class="namaste-wrapper">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDz81EbsFIAFDBZmlaK7_Tk8A__D7AlbUf4Q&s" class="splash-namasthe-img">
+</div>
+    <!-- <img class="splash-namasthe-img"
+         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDz81EbsFIAFDBZmlaK7_Tk8A__D7AlbUf4Q&s"
          alt="Namaste"
-         onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80';this.style.borderRadius='50%';" />
+         onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80';this.style.borderRadius='50%';" /> -->
     <div class="splash-namaste-text">Namaste 🙏</div>
     <div class="splash-welcome-text">Welcome to</div>
     <div class="splash-restaurant-name">
