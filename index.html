@@ -30,117 +30,39 @@
   body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
   /* ─── WELCOME SPLASH SCREEN ─── */
-  #welcomeSplash {
-    position:fixed;inset:0;z-index:2000;overflow:hidden;
-    background:#1a0a04;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .splash-bg {
-    position:absolute;inset:0;
-    background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80');
-    background-size:cover;background-position:center;
-    opacity:0;
-    animation: splashBgReveal 1s ease 0.3s forwards;
-  }
-  @keyframes splashBgReveal {
-    from { opacity:0; transform:scale(1.08); }
-    to   { opacity:0.18; transform:scale(1); }
-  }
-  .splash-overlay {
-    position:absolute;inset:0;
-    background: radial-gradient(ellipse at center, rgba(26,10,4,0.3) 0%, rgba(26,10,4,0.85) 100%);
-  }
-  .splash-content {
-    position:relative;z-index:3;text-align:center;padding:24px;
-    display:flex;flex-direction:column;align-items:center;
-    transform:translateY(80px);opacity:0;
-    animation: splashContentRise 1s cubic-bezier(.16,1,.3,1) 0.6s forwards;
-  }
-  @keyframes splashContentRise {
-    from { transform:translateY(80px);opacity:0; }
-    to   { transform:translateY(0);opacity:1; }
-  }
- .splash-namasthe-img {
-  width: 160px;
-  height: 160px;
-  object-fit: cover; /* better for circle */
-  border-radius: 50%; /* makes it a circle */
-  filter: drop-shadow(0 0 40px rgba(200,151,58,0.5));
-  animation: namastePulse 2s ease-in-out 1.8s infinite alternate;
-}
-  @keyframes namastePulse {
-    from { filter:drop-shadow(0 0 30px rgba(200,151,58,0.4)); transform:scale(1); }
-    to   { filter:drop-shadow(0 0 55px rgba(200,151,58,0.8)); transform:scale(1.04); }
-  }
-  .splash-namaste-text {
-    font-family:'Great Vibes',cursive;
-    font-size:4.5rem;color:var(--gold-light);
-    text-shadow:0 0 30px rgba(200,151,58,0.6),0 4px 20px rgba(0,0,0,0.5);
-    line-height:1;margin:12px 0 4px;
-    opacity:0;
-    animation: fadeInText 0.8s ease 1.4s forwards;
-  }
-  @keyframes fadeInText { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-  .splash-welcome-text {
-    color:rgba(255,255,255,0.75);font-size:0.8rem;letter-spacing:4px;
-    text-transform:uppercase;margin-bottom:20px;
-    opacity:0;animation: fadeInText 0.8s ease 1.8s forwards;
-  }
-  .splash-restaurant-name {
-    font-family:'Playfair Display',serif;
-    font-size:2.2rem;font-weight:700;line-height:1.15;
-    color:#fff;text-align:center;
-    text-shadow:0 2px 20px rgba(0,0,0,0.5);
-    min-height:120px;
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    opacity:0;animation: fadeInText 0.5s ease 2.2s forwards;
-  }
-  .splash-restaurant-name .line1 { color:var(--gold-light); font-size:2.8rem; }
-  .splash-restaurant-name .line2 { font-size:1.3rem; font-weight:400; color:rgba(255,255,255,0.85); letter-spacing:2px; }
-  .splash-restaurant-name .line3 { font-size:1rem; font-weight:300; color:rgba(200,151,58,0.9); letter-spacing:3px; font-style:italic; }
-  .splash-divider {
-    display:flex;align-items:center;gap:10px;margin:18px 0;width:280px;
-    opacity:0;animation:fadeInText 0.8s ease 2.5s forwards;
-  }
+  #welcomeSplash{position:fixed;inset:0;z-index:2000;overflow:hidden;background:#1a0a04;display:flex;align-items:center;justify-content:center;}
+  .splash-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80');background-size:cover;background-position:center;opacity:0;animation:splashBgReveal 1s ease 0.3s forwards;}
+  @keyframes splashBgReveal{from{opacity:0;transform:scale(1.08)}to{opacity:0.18;transform:scale(1)}}
+  .splash-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(26,10,4,0.3) 0%,rgba(26,10,4,0.85) 100%);}
+  .splash-content{position:relative;z-index:3;text-align:center;padding:24px;display:flex;flex-direction:column;align-items:center;transform:translateY(80px);opacity:0;animation:splashContentRise 1s cubic-bezier(.16,1,.3,1) 0.6s forwards;}
+  @keyframes splashContentRise{from{transform:translateY(80px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .splash-namasthe-img{width:160px;height:160px;object-fit:cover;border-radius:50%;filter:drop-shadow(0 0 40px rgba(200,151,58,0.5));animation:namastePulse 2s ease-in-out 1.8s infinite alternate;}
+  @keyframes namastePulse{from{filter:drop-shadow(0 0 30px rgba(200,151,58,0.4));transform:scale(1)}to{filter:drop-shadow(0 0 55px rgba(200,151,58,0.8));transform:scale(1.04)}}
+  .splash-namaste-text{font-family:'Great Vibes',cursive;font-size:4.5rem;color:var(--gold-light);text-shadow:0 0 30px rgba(200,151,58,0.6),0 4px 20px rgba(0,0,0,0.5);line-height:1;margin:12px 0 4px;opacity:0;animation:fadeInText 0.8s ease 1.4s forwards;}
+  @keyframes fadeInText{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .splash-welcome-text{color:rgba(255,255,255,0.75);font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeInText 0.8s ease 1.8s forwards;}
+  .splash-restaurant-name{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1.15;color:#fff;text-align:center;text-shadow:0 2px 20px rgba(0,0,0,0.5);min-height:120px;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;animation:fadeInText 0.5s ease 2.2s forwards;}
+  .splash-restaurant-name .line1{color:var(--gold-light);font-size:2.8rem;}
+  .splash-restaurant-name .line2{font-size:1.3rem;font-weight:400;color:rgba(255,255,255,0.85);letter-spacing:2px;}
+  .splash-restaurant-name .line3{font-size:1rem;font-weight:300;color:rgba(200,151,58,0.9);letter-spacing:3px;font-style:italic;}
+  .splash-divider{display:flex;align-items:center;gap:10px;margin:18px 0;width:280px;opacity:0;animation:fadeInText 0.8s ease 2.5s forwards;}
   .splash-divider span{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
   .splash-divider i{color:var(--gold);font-size:0.8rem;}
-  .splash-enter-btn {
-    background:linear-gradient(135deg,var(--gold),var(--gold-light));
-    color:#1a120b;border:none;border-radius:50px;
-    padding:15px 40px;font-family:'Poppins',sans-serif;font-weight:700;
-    font-size:1rem;cursor:pointer;letter-spacing:1px;
-    box-shadow:0 8px 30px rgba(200,151,58,0.45);
-    transition:all 0.3s;display:flex;align-items:center;gap:10px;
-    opacity:0;animation:fadeInText 0.8s ease 3.2s forwards;
-  }
+  .splash-enter-btn{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a120b;border:none;border-radius:50px;padding:15px 40px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:1px;box-shadow:0 8px 30px rgba(200,151,58,0.45);transition:all 0.3s;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeInText 0.8s ease 3.2s forwards;}
   .splash-enter-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(200,151,58,0.6);}
-  .splash-note {
-    color:rgba(255,255,255,0.35);font-size:0.7rem;margin-top:16px;
-    opacity:0;animation:fadeInText 0.8s ease 3.6s forwards;
-  }
-  .typing-cursor::after {
-    content:'|';animation:blink 0.7s step-end infinite;color:var(--gold);
-  }
+  .splash-note{color:rgba(255,255,255,0.35);font-size:0.7rem;margin-top:16px;opacity:0;animation:fadeInText 0.8s ease 3.6s forwards;}
+  .typing-cursor::after{content:'|';animation:blink 0.7s step-end infinite;color:var(--gold);}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .namaste-wrapper{position:relative;width:180px;height:180px;display:flex;align-items:center;justify-content:center;}
+  .namaste-wrapper::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:conic-gradient(rgba(200,151,58,0.9),rgba(255,215,120,0.4),rgba(200,151,58,0.9));animation:rotateRing 3s linear infinite;filter:blur(8px);z-index:1;}
+  .namaste-wrapper::after{content:"";position:absolute;width:165px;height:165px;background:#000;border-radius:50%;z-index:1;}
+  .splash-namasthe-img{z-index:2;position:relative;}
+  @keyframes rotateRing{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
   /* ─── TABLE ENTRY SCREEN ─── */
-  #tableEntryScreen {
-    position:fixed;inset:0;z-index:1000;
-    background: linear-gradient(135deg, #1a120b 0%, #3d1f05 50%, #1a120b 100%);
-    display:none;align-items:center;justify-content:center;padding:24px;
-  }
-  #tableEntryScreen::before {
-    content:'';position:absolute;inset:0;
-    background: radial-gradient(ellipse at 50% 20%, rgba(200,151,58,0.22) 0%, transparent 65%),
-                radial-gradient(ellipse at 80% 80%, rgba(224,90,43,0.12) 0%, transparent 55%);
-  }
-  .entry-card {
-    background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);
-    border:1px solid rgba(200,151,58,0.3);border-radius:28px;
-    padding:40px 32px;width:100%;max-width:380px;text-align:center;
-    position:relative;z-index:1;box-shadow:0 24px 64px rgba(0,0,0,0.5);
-    animation:entryCardIn 0.6s cubic-bezier(.32,1.25,.42,.97) both;
-  }
+  #tableEntryScreen{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#1a120b 0%,#3d1f05 50%,#1a120b 100%);display:none;align-items:center;justify-content:center;padding:24px;}
+  #tableEntryScreen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(200,151,58,0.22) 0%,transparent 65%),radial-gradient(ellipse at 80% 80%,rgba(224,90,43,0.12) 0%,transparent 55%);}
+  .entry-card{background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1px solid rgba(200,151,58,0.3);border-radius:28px;padding:40px 32px;width:100%;max-width:380px;text-align:center;position:relative;z-index:1;box-shadow:0 24px 64px rgba(0,0,0,0.5);animation:entryCardIn 0.6s cubic-bezier(.32,1.25,.42,.97) both;}
   @keyframes entryCardIn{from{opacity:0;transform:translateY(40px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
   .entry-logo-ring{width:88px;height:88px;border-radius:50%;border:3px solid var(--gold);overflow:hidden;margin:0 auto 16px;box-shadow:0 0 0 8px rgba(200,151,58,0.15),0 8px 28px rgba(0,0,0,0.4);}
   .entry-logo-ring img{width:100%;height:100%;object-fit:cover;}
@@ -321,23 +243,50 @@
   .cbtn-confirm:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.45);}
   .cbtn-confirm:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 
-  /* ─── WHATSAPP REPLY POPUP (MAIN CONFIRM/CANCEL POPUP) ─── */
-  #waReplyPopup {
-    position:fixed;inset:0;z-index:800;
-    background:rgba(10,6,3,0.88);backdrop-filter:blur(10px);
-    display:none;opacity:0;transition:opacity 0.35s;
+  /* ─── SMALL CONFIRM POPUP ─── */
+  #miniConfirmPopup{
+    position:fixed;inset:0;z-index:900;
+    background:rgba(10,6,3,0.7);backdrop-filter:blur(8px);
+    display:none;opacity:0;transition:opacity 0.25s;
     align-items:center;justify-content:center;padding:20px;
   }
-  #waReplyPopup.open { display:flex; }
-  #waReplyPopup.visible { opacity:1; }
-  .wa-reply-modal {
-    background:#fff;border-radius:24px;width:100%;max-width:400px;
-    overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.6);
-    transform:scale(0.85) translateY(30px);
-    transition:transform 0.4s cubic-bezier(.32,1.25,.42,.97);
-    text-align:center;
+  #miniConfirmPopup.open{display:flex;}
+  #miniConfirmPopup.visible{opacity:1;}
+  .mini-popup-card{
+    background:#fff;border-radius:20px;width:100%;max-width:340px;
+    padding:28px 24px 24px;text-align:center;
+    box-shadow:0 24px 64px rgba(0,0,0,0.55);
+    transform:scale(0.88) translateY(20px);
+    transition:transform 0.3s cubic-bezier(.32,1.25,.42,.97);
   }
-  #waReplyPopup.visible .wa-reply-modal { transform:scale(1) translateY(0); }
+  #miniConfirmPopup.visible .mini-popup-card{transform:scale(1) translateY(0);}
+  .mini-popup-icon{font-size:2.4rem;display:block;margin-bottom:12px;}
+  .mini-popup-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1a120b;margin-bottom:6px;}
+  .mini-popup-sub{font-size:0.8rem;color:#7a5c42;line-height:1.5;margin-bottom:20px;}
+  .mini-timer-bar{height:4px;background:#eee;border-radius:2px;overflow:hidden;margin-bottom:20px;}
+  .mini-timer-fill{height:100%;background:linear-gradient(90deg,#25d366,#128c7e);border-radius:2px;width:100%;transition:width 1s linear;}
+  .mini-popup-btns{display:flex;flex-direction:column;gap:10px;}
+  .mini-btn-confirm{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.92rem;cursor:pointer;box-shadow:0 4px 14px rgba(37,211,102,0.35);transition:all 0.25s;}
+  .mini-btn-confirm:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,0.45);}
+  .mini-btn-back{width:100%;padding:12px;border:2px solid rgba(200,151,58,0.4);border-radius:12px;background:transparent;color:#7a5c42;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.88rem;cursor:pointer;transition:all 0.25s;}
+  .mini-btn-back:hover{background:rgba(200,151,58,0.1);border-color:var(--gold);}
+
+  /* ─── ORDER SENT POPUP ─── */
+  #orderSentPopup{
+    position:fixed;inset:0;z-index:950;
+    background:rgba(10,6,3,0.82);backdrop-filter:blur(10px);
+    display:none;opacity:0;transition:opacity 0.3s;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  #orderSentPopup.open{display:flex;}
+  #orderSentPopup.visible{opacity:1;}
+  .sent-popup-card{
+    background:#fff;border-radius:24px;width:100%;max-width:360px;
+    overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,0.55);
+    transform:scale(0.88) translateY(24px);
+    transition:transform 0.35s cubic-bezier(.32,1.25,.42,.97);
+  }
+  #orderSentPopup.visible .sent-popup-card{transform:scale(1) translateY(0);}
 
   /* ─── AI FEEDBACK CHAT MODAL ─── */
   #feedbackOverlay{position:fixed;inset:0;z-index:600;background:rgba(10,6,3,0.8);backdrop-filter:blur(8px);display:none;opacity:0;transition:opacity 0.35s;align-items:flex-end;justify-content:center;}
@@ -397,79 +346,20 @@
   @keyframes cartBounce{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}70%{transform:scale(0.95)}}
   @media(min-width:768px){.cart-panel{max-width:480px;left:auto;right:0;border-radius:24px 0 0 24px;max-height:100vh;}.feedback-panel{border-radius:24px;height:85vh;margin-bottom:24px;}.hero{padding-bottom:40px;}.restaurant-name{font-size:2.4rem;}}
   @media(min-width:1024px){.menu-section{padding:30px 40px 120px;}.controls{padding:20px 40px 0;}}
-
-
-  .namaste-wrapper {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.splash-namasthe-img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 2;
-  position: relative;
-}
-
-/* 🔥 Animated Glow Ring */
-.namaste-wrapper::before {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  background: conic-gradient(
-    rgba(200,151,58,0.9),
-    rgba(255,215,120,0.4),
-    rgba(200,151,58,0.9)
-  );
-  animation: rotateRing 3s linear infinite;
-  filter: blur(8px);
-  z-index: 1;
-}
-
-/* Inner dark layer for clean ring look */
-.namaste-wrapper::after {
-  content: "";
-  position: absolute;
-  width: 165px;
-  height: 165px;
-  background: #000; /* match your background */
-  border-radius: 50%;
-  z-index: 1;
-}
-
-/* Rotation Animation */
-@keyframes rotateRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 </style>
 </head>
 <body>
 
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Added to cart!</span></div>
 
-<!-- ═══════════════════════════════════ -->
-<!-- WELCOME SPLASH SCREEN              -->
-<!-- ═══════════════════════════════════ -->
+<!-- WELCOME SPLASH SCREEN -->
 <div id="welcomeSplash">
   <div class="splash-bg"></div>
   <div class="splash-overlay"></div>
   <div class="splash-content">
     <div class="namaste-wrapper">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDz81EbsFIAFDBZmlaK7_Tk8A__D7AlbUf4Q&s" class="splash-namasthe-img">
-</div>
-    <!-- <img class="splash-namasthe-img"
-         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDz81EbsFIAFDBZmlaK7_Tk8A__D7AlbUf4Q&s"
-         alt="Namaste"
-         onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80';this.style.borderRadius='50%';" /> -->
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDz81EbsFIAFDBZmlaK7_Tk8A__D7AlbUf4Q&s" class="splash-namasthe-img">
+    </div>
     <div class="splash-namaste-text">Namaste 🙏</div>
     <div class="splash-welcome-text">Welcome to</div>
     <div class="splash-restaurant-name">
@@ -613,19 +503,39 @@
     <div class="confirm-actions">
       <button class="cbtn cbtn-modify" onclick="modifyOrder()"><i class="fas fa-edit"></i> Modify Order</button>
       <button class="cbtn cbtn-cancel" onclick="cancelOrder()"><i class="fas fa-times-circle"></i> Cancel Order</button>
-      <button class="cbtn cbtn-confirm full-btn" id="confirmBtn" onclick="confirmOrder()">
+      <button class="cbtn cbtn-confirm full-btn" id="confirmBtn" onclick="askConfirmBeforeSend()">
         <i class="fab fa-whatsapp" style="font-size:1.1rem"></i> Confirm &amp; Send on WhatsApp
       </button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- WHATSAPP REPLY POPUP — SINGLE POPUP HANDLES EVERYTHING     -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div id="waReplyPopup">
-  <div class="wa-reply-modal" id="waReplyModal">
-    <!-- Content injected dynamically by JS -->
+<!-- ═══════════════════════════════════════════ -->
+<!-- SMALL "ARE YOU SURE?" MINI CONFIRM POPUP   -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="miniConfirmPopup">
+  <div class="mini-popup-card">
+    <span class="mini-popup-icon">📲</span>
+    <div class="mini-popup-title">Confirm &amp; Send Order?</div>
+    <div class="mini-popup-sub">Your order will be sent to the restaurant via WhatsApp. Sending in <strong id="miniCountdown">3</strong>s…</div>
+    <div class="mini-timer-bar"><div class="mini-timer-fill" id="miniTimerFill"></div></div>
+    <div class="mini-popup-btns">
+      <button class="mini-btn-confirm" onclick="proceedSendOrder()">
+        <i class="fab fa-whatsapp"></i> Yes, Send Order
+      </button>
+      <button class="mini-btn-back" onclick="closeMiniConfirm()">
+        ← Go Back
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- ORDER SENT SUCCESS POPUP                    -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="orderSentPopup">
+  <div class="sent-popup-card" id="sentPopupCard">
+    <!-- content injected by JS -->
   </div>
 </div>
 
@@ -658,7 +568,6 @@ const splashLines = [
   { el: 'typingLine2', text: 'MULTI CUISINE RESTAURANT', speed: 55 },
   { el: 'typingLine3', text: '— Taste Beyond Borders —', speed: 50 },
 ];
-
 function typeText(elId, text, speed, onDone) {
   const el = document.getElementById(elId);
   el.classList.add('typing-cursor');
@@ -672,9 +581,7 @@ function typeText(elId, text, speed, onDone) {
     }
   }, speed);
 }
-
 function startTypingSequence() {
-  const delay = 2800;
   setTimeout(() => {
     typeText(splashLines[0].el, splashLines[0].text, splashLines[0].speed, () => {
       setTimeout(() => {
@@ -684,10 +591,8 @@ function startTypingSequence() {
               setTimeout(() => {
                 const btn = document.getElementById('splashEnterBtn');
                 const note = document.getElementById('splashNote');
-                btn.style.display = 'flex';
-                note.style.display = 'block';
-                btn.style.opacity = '0';
-                note.style.opacity = '0';
+                btn.style.display = 'flex'; note.style.display = 'block';
+                btn.style.opacity = '0'; note.style.opacity = '0';
                 btn.style.animation = 'fadeInText 0.7s ease forwards';
                 note.style.animation = 'fadeInText 0.7s ease 0.3s forwards';
               }, 300);
@@ -696,23 +601,19 @@ function startTypingSequence() {
         });
       }, 400);
     });
-  }, delay);
+  }, 2800);
 }
-
 function hideSplash() {
   const splash = document.getElementById('welcomeSplash');
   splash.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-  splash.style.opacity = '0';
-  splash.style.transform = 'scale(1.04)';
+  splash.style.opacity = '0'; splash.style.transform = 'scale(1.04)';
   setTimeout(() => {
     splash.style.display = 'none';
-    const tableScreen = document.getElementById('tableEntryScreen');
-    tableScreen.style.display = 'flex';
-    tableScreen.style.opacity = '0';
-    setTimeout(() => { tableScreen.style.transition = 'opacity 0.4s'; tableScreen.style.opacity = '1'; }, 10);
+    const ts = document.getElementById('tableEntryScreen');
+    ts.style.display = 'flex'; ts.style.opacity = '0';
+    setTimeout(() => { ts.style.transition = 'opacity 0.4s'; ts.style.opacity = '1'; }, 10);
   }, 480);
 }
-
 window.addEventListener('load', () => {
   document.getElementById('tableEntryScreen').style.display = 'none';
   startTypingSequence();
@@ -722,7 +623,6 @@ window.addEventListener('load', () => {
 // TABLE ENTRY
 // ════════════════════════════════════════════
 let tableNumber = '';
-
 function confirmTableEntry() {
   const val = document.getElementById('tableInput').value.trim();
   const errEl = document.getElementById('entryError');
@@ -739,12 +639,10 @@ function confirmTableEntry() {
   screen.style.opacity = '0'; screen.style.transform = 'scale(1.04)';
   setTimeout(() => { screen.style.display = 'none'; document.getElementById('mainApp').style.display = 'block'; renderMenu(); }, 380);
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   const ti = document.getElementById('tableInput');
   if (ti) ti.addEventListener('keydown', e => { if (e.key === 'Enter') confirmTableEntry(); });
 });
-
 function changeTable() {
   if (!confirm('Change your table number? This will clear your current cart.')) return;
   cart = []; updateCartBadge();
@@ -794,6 +692,8 @@ let confirmTimerInterval = null;
 let confirmSecondsLeft = 60;
 const CONFIRM_DURATION = 60;
 let lastOrderSnapshot = [];
+let miniConfirmTimer = null;
+let miniSecondsLeft = 3;
 
 // ════════════════════════════════════════════
 // RENDER MENU
@@ -971,31 +871,72 @@ function cancelOrder() {
   setTimeout(() => showToast('🚫 Order Cancelled'), 400);
 }
 
-function confirmOrder() {
-  clearConfirmTimer();
+// ════════════════════════════════════════════
+// MINI CONFIRM POPUP (3-second countdown)
+// ════════════════════════════════════════════
+function askConfirmBeforeSend() {
+  clearConfirmTimer(); // pause the 60s timer
+  miniSecondsLeft = 3;
+
+  const overlay = document.getElementById('miniConfirmPopup');
+  overlay.classList.add('open');
+  setTimeout(() => overlay.classList.add('visible'), 10);
+
+  // reset bar and countdown
+  document.getElementById('miniCountdown').textContent = miniSecondsLeft;
+  const fill = document.getElementById('miniTimerFill');
+  fill.style.transition = 'none';
+  fill.style.width = '100%';
+
+  setTimeout(() => {
+    fill.style.transition = 'width 3s linear';
+    fill.style.width = '0%';
+  }, 30);
+
+  miniConfirmTimer = setInterval(() => {
+    miniSecondsLeft--;
+    document.getElementById('miniCountdown').textContent = miniSecondsLeft;
+    if (miniSecondsLeft <= 0) {
+      clearInterval(miniConfirmTimer);
+      proceedSendOrder();
+    }
+  }, 1000);
+}
+
+function closeMiniConfirm() {
+  clearInterval(miniConfirmTimer);
+  const overlay = document.getElementById('miniConfirmPopup');
+  overlay.classList.remove('visible');
+  setTimeout(() => { overlay.classList.remove('open'); }, 280);
+  // resume 60s timer
+  startConfirmTimer();
+}
+
+function proceedSendOrder() {
+  clearInterval(miniConfirmTimer);
+  // close mini popup
+  const mini = document.getElementById('miniConfirmPopup');
+  mini.classList.remove('visible');
+  setTimeout(() => mini.classList.remove('open'), 280);
+
   lastOrderSnapshot = cart.map(i => ({...i}));
-  // Clear cart immediately
   cart = []; updateCartBadge(); renderMenu();
   closeConfirmModal();
-  // Open WhatsApp, then show in-app popup after short delay
-  setTimeout(() => {
-    sendWhatsAppOrder(false);
-  }, 450);
+
+  setTimeout(() => sendWhatsAppOrder(), 400);
 }
 
 function autoConfirmOrder() {
   lastOrderSnapshot = cart.map(i => ({...i}));
   cart = []; updateCartBadge(); renderMenu();
   closeConfirmModal();
-  setTimeout(() => {
-    sendWhatsAppOrder(true);
-  }, 450);
+  setTimeout(() => sendWhatsAppOrder(), 450);
 }
 
 // ════════════════════════════════════════════
-// WHATSAPP MESSAGE SENDER
+// WHATSAPP MESSAGE — clean & simple
 // ════════════════════════════════════════════
-function sendWhatsAppOrder(autoConfirmed) {
+function sendWhatsAppOrder() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
   const dateStr = now.toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'});
@@ -1009,9 +950,6 @@ function sendWhatsAppOrder(autoConfirmed) {
   const msg =
 `🍽️ *New Order — 99Times Square*
 
-Hi! Mee order ready ga undi 🚀
-Please confirm your order within 1 minute ⏳
-
 📍 *Restaurant:* 99Times Square
 🪑 *Table:* ${tableNumber}
 🕐 *Time:* ${dateStr}, ${timeStr}
@@ -1020,161 +958,67 @@ Please confirm your order within 1 minute ⏳
 ${itemLines}━━━━━━━━━━━━━━━━━━━
 💰 *Total: ₹${total}*
 
-👇 *Choose an option:*
-1️⃣ Confirm Order
-2️⃣ Cancel Order
-
-👉 Reply with *1* or *2*
-
-⚠️ Time lo reply ivvakapothe order automatic ga cancel avuthundi.${autoConfirmed ? '\n\n⏱️ _Auto-confirmed after 1-minute timer._' : ''}
-
 _Thank you for choosing 99Times Square!_ 🙏`;
 
-  // Open WhatsApp
   window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`, '_blank');
 
-  // Show in-app confirmation popup after 800ms
-  setTimeout(() => showWaChoicePopup(), 800);
+  // Show success popup
+  setTimeout(() => showOrderSentPopup(), 600);
 }
 
 // ════════════════════════════════════════════
-// IN-APP CONFIRM / CANCEL POPUP
+// ORDER SENT SUCCESS POPUP
 // ════════════════════════════════════════════
-function showWaChoicePopup() {
-  const modal = document.getElementById('waReplyModal');
+function showOrderSentPopup() {
+  const card = document.getElementById('sentPopupCard');
 
-  modal.innerHTML = `
-    <div style="padding:36px 28px 28px;text-align:center;">
-      <div style="width:56px;height:56px;border-radius:50%;background:rgba(37,211,102,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;">✅</div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#1a120b;margin-bottom:8px;">Order sent!</div>
-      <div style="font-size:0.82rem;color:#7a5c42;line-height:1.6;margin-bottom:28px;">Your order was sent via WhatsApp.<br>Please confirm or cancel below.</div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <button onclick="handleOrderChoice('confirm')"
-          style="width:100%;padding:15px;border:none;border-radius:14px;
-                 background:#25d366;color:#fff;
-                 font-family:'Poppins',sans-serif;font-weight:700;
-                 font-size:0.95rem;cursor:pointer;
-                 box-shadow:0 4px 16px rgba(37,211,102,0.35);">
-          Confirm order
-        </button>
-        <button onclick="handleOrderChoice('cancel')"
-          style="width:100%;padding:15px;
-                 border:2px solid rgba(231,76,60,0.35);border-radius:14px;
-                 background:transparent;color:#c0392b;
-                 font-family:'Poppins',sans-serif;font-weight:600;
-                 font-size:0.95rem;cursor:pointer;">
-          Cancel order
-        </button>
+  card.innerHTML = `
+    <div style="background:linear-gradient(135deg,#25d366,#128c7e);padding:30px 20px 24px;text-align:center;">
+      <span style="font-size:3rem;display:block;margin-bottom:8px;">✅</span>
+      <div style="color:#fff;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;">Order Sent!</div>
+      <div style="color:rgba(255,255,255,0.85);font-size:0.82rem;margin-top:5px;">
+        ధన్యవాదాలు! మీ order WhatsApp కి పంపబడింది 🙏
       </div>
+      <div style="background:rgba(255,255,255,0.2);color:#fff;padding:4px 14px;border-radius:50px;font-size:0.72rem;font-weight:700;display:inline-block;margin-top:10px;">
+        <i class="fas fa-chair"></i> Table ${tableNumber}
+      </div>
+    </div>
+    <div style="padding:20px 22px 24px;">
+      <div style="background:#fff8ee;border:1px solid rgba(200,151,58,0.3);border-radius:14px;padding:14px 16px;margin-bottom:18px;">
+        <div style="font-size:0.78rem;font-weight:700;color:#7a5c42;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+          <i class="fas fa-info-circle" style="color:var(--gold)"></i> Want to cancel your order?
+        </div>
+        <div style="font-size:0.76rem;color:#7a5c42;line-height:1.7;">
+          🔔 Please inform the <strong>waiter</strong> at your table directly.<br>
+          📱 Or WhatsApp us: mention your <strong>Table ${tableNumber}</strong> and type <em>"Cancel my order"</em>.
+        </div>
+      </div>
+      <button onclick="closeOrderSentPopup()"
+        style="width:100%;padding:14px;border:none;border-radius:12px;
+               background:linear-gradient(135deg,#25d366,#128c7e);
+               color:#fff;font-family:'Poppins',sans-serif;font-weight:700;
+               font-size:0.92rem;cursor:pointer;
+               box-shadow:0 4px 14px rgba(37,211,102,0.35);">
+        <i class="fas fa-check-circle"></i> Got it, Thank You! 😊
+      </button>
     </div>`;
 
-  openWaReplyPopup();
-}
-
-function handleOrderChoice(choice) {
-  const modal = document.getElementById('waReplyModal');
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
-
-  if (choice === 'confirm') {
-    // ── CONFIRMED: Show green thank you screen ──
-    modal.innerHTML = `
-      <div style="background:linear-gradient(135deg,#25d366,#128c7e);padding:32px 20px 26px;text-align:center;">
-        <span style="font-size:3.5rem;display:block;margin-bottom:10px;">✅</span>
-        <div style="color:#fff;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;">Order Confirmed!</div>
-        <div style="color:rgba(255,255,255,0.88);font-size:0.85rem;margin-top:6px;">Thank You! 🍽️ Your meal is being prepared</div>
-        <div style="background:rgba(255,255,255,0.2);color:#fff;padding:4px 16px;border-radius:50px;font-size:0.75rem;font-weight:700;display:inline-block;margin-top:10px;">
-          <i class="fas fa-chair"></i> Table ${tableNumber}
-        </div>
-      </div>
-      <div style="padding:24px 22px 28px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">😊🙏</div>
-        <div style="font-size:0.95rem;color:#3d2c1e;line-height:1.7;margin-bottom:22px;">
-          <strong>ధన్యవాదాలు! Order Confirmed!</strong><br><br>
-          మీ order అందింది. మా kitchen team మీ delicious meal prepare చేస్తున్నారు.<br><br>
-          Sit back and relax! 🌟
-        </div>
-        <button onclick="closeWaReplyPopupAndReturn()"
-          style="width:100%;padding:15px;border:none;border-radius:14px;
-                 background:linear-gradient(135deg,#25d366,#128c7e);
-                 color:#fff;font-family:'Poppins',sans-serif;font-weight:700;
-                 font-size:0.95rem;cursor:pointer;
-                 box-shadow:0 4px 16px rgba(37,211,102,0.4);">
-          <i class="fas fa-check-circle"></i> Great, Thank You! 😊
-        </button>
-      </div>`;
-
-    // Notify restaurant — confirmed
-    const confirmMsg = `✅ *Order CONFIRMED — Table ${tableNumber}*\n\n📍 *Restaurant:* 99Times Square\n🕐 *Time:* ${timeStr}\n\n_Customer confirmed their order from Table ${tableNumber}. Please proceed with preparation!_ 🍽️🙏`;
-    setTimeout(() => window.open(`https://wa.me/919392328600?text=${encodeURIComponent(confirmMsg)}`, '_blank'), 700);
-
-  } else {
-    // ── CANCELLED: Show red screen, then redirect ──
-    modal.innerHTML = `
-      <div style="background:linear-gradient(135deg,#e74c3c,#c0392b);padding:32px 20px 26px;text-align:center;">
-        <span style="font-size:3.5rem;display:block;margin-bottom:10px;">🚫</span>
-        <div style="color:#fff;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;">Order Cancelled</div>
-        <div style="color:rgba(255,255,255,0.88);font-size:0.85rem;margin-top:6px;">Table ${tableNumber} — Order has been cancelled</div>
-      </div>
-      <div style="padding:24px 22px 28px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">😔🙏</div>
-        <div style="font-size:0.95rem;color:#3d2c1e;line-height:1.7;margin-bottom:8px;">
-          మీ order <strong>cancel</strong> చేయబడింది.<br><br>
-          మీరు మళ్ళీ order చేయాలనుకుంటే menu కి తిరిగి వెళ్ళవచ్చు.<br>
-          We hope to serve you soon! 🙏
-        </div>
-        <div style="background:rgba(231,76,60,0.08);border:1px solid rgba(231,76,60,0.3);border-radius:12px;padding:12px;margin-bottom:18px;">
-          <div style="font-size:0.78rem;color:#c0392b;font-weight:600;">
-            <i class="fas fa-info-circle"></i> Redirecting to menu in 3 seconds...
-          </div>
-        </div>
-        <button onclick="doCancelRedirect()"
-          style="width:100%;padding:15px;border:none;border-radius:14px;
-                 background:linear-gradient(135deg,#c8973a,#f0c060);
-                 color:#1a120b;font-family:'Poppins',sans-serif;font-weight:700;
-                 font-size:0.95rem;cursor:pointer;
-                 box-shadow:0 4px 16px rgba(200,151,58,0.4);">
-          <i class="fas fa-utensils"></i> Back to Menu Now
-        </button>
-      </div>`;
-
-    // Notify restaurant — cancelled
-    const cancelMsg = `🚫 *Order CANCELLED — Table ${tableNumber}*\n\n📍 *Restaurant:* 99Times Square\n🕐 *Time:* ${timeStr}\n\n_Customer cancelled their order from Table ${tableNumber}. Please note!_ 🙏`;
-    setTimeout(() => window.open(`https://wa.me/919392328600?text=${encodeURIComponent(cancelMsg)}`, '_blank'), 700);
-
-    // Auto-redirect after 3 seconds
-    setTimeout(() => doCancelRedirect(), 3000);
-  }
-}
-
-function openWaReplyPopup() {
-  const overlay = document.getElementById('waReplyPopup');
+  const overlay = document.getElementById('orderSentPopup');
   overlay.classList.add('open');
   setTimeout(() => overlay.classList.add('visible'), 10);
   document.body.style.overflow = 'hidden';
 }
 
-function closeWaReplyPopup() {
-  const overlay = document.getElementById('waReplyPopup');
+function closeOrderSentPopup() {
+  const overlay = document.getElementById('orderSentPopup');
   overlay.classList.remove('visible');
-  setTimeout(() => {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }, 350);
+  setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 320);
+  setTimeout(() => showToast('😊 Enjoy your meal!'), 400);
 }
 
-function closeWaReplyPopupAndReturn() {
-  closeWaReplyPopup();
-  setTimeout(() => showToast('😊 Thank you! Enjoy your meal!'), 400);
-}
-
-function doCancelRedirect() {
-  closeWaReplyPopup();
-  setTimeout(() => {
-    window.location.href = 'https://99timessquare-menu.netlify.app/';
-  }, 400);
-}
-
+// ════════════════════════════════════════════
+// CALL WAITER
+// ════════════════════════════════════════════
 function callWaiter() {
   const msg = `🔔 Customer from *Table ${tableNumber}* is calling the waiter.\n\n_Please attend to Table ${tableNumber} at 99Times Square._`;
   window.open(`https://wa.me/919392328600?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1221,7 +1065,6 @@ function hideFbTooltip() { document.getElementById('fbTooltip').classList.remove
 // ════════════════════════════════════════════
 const WHATSAPP_NUMBER = '919392328600';
 const GOOGLE_REVIEW_URL = 'https://g.page/r/YOUR_GOOGLE_REVIEW_LINK';
-
 let fbConversationState = 'idle';
 let fbSentiment = null;
 let fbMessageHistory = [];
@@ -1235,13 +1078,11 @@ function openFeedback() {
     setTimeout(() => startFeedbackConversation(), 400);
   }
 }
-
 function closeFeedback() {
   const overlay = document.getElementById('feedbackOverlay');
   overlay.classList.remove('visible');
   setTimeout(() => { overlay.classList.remove('open'); document.body.style.overflow = ''; }, 350);
 }
-
 function startFeedbackConversation() {
   fbConversationState = 'greeted';
   addBotMessage(`Hello! 👋 This is a quick follow-up from <strong>99Times Square</strong>. Thank you for visiting us today! 🙏`, () => {
@@ -1258,20 +1099,17 @@ function startFeedbackConversation() {
     }, 800);
   });
 }
-
 function fbHandleSentiment(sentiment, userText) {
   clearQuickReplies();
   addUserMessage(userText);
   fbSentiment = sentiment;
   fbConversationState = 'sentiment_captured';
-
   if (sentiment === 'busy') {
     setTimeout(() => {
       addBotMessage(`No problem at all! 😊 Thank you for your time. Have a wonderful day ahead! 🌟`, () => { fbConversationState = 'done'; });
     }, 700);
     return;
   }
-
   if (sentiment === 'happy' || sentiment === 'neutral') {
     setTimeout(() => {
       const msg = sentiment === 'happy'
@@ -1295,7 +1133,6 @@ function fbHandleSentiment(sentiment, userText) {
       });
     }, 700);
   }
-
   if (sentiment === 'unhappy') {
     setTimeout(() => {
       addBotMessage(`I'm really sorry to hear that. 😔 Your feedback is very important to us and helps us improve.`, () => {
@@ -1314,13 +1151,11 @@ function fbHandleSentiment(sentiment, userText) {
     }, 700);
   }
 }
-
 function fbSelectFeedbackTopic(topic) {
   clearQuickReplies();
   if (topic) { addUserMessage(topic); fbReceiveNegativeFeedback(topic); }
   else { addBotMessage(`Please go ahead and share what happened. I'm listening carefully. 👂`); fbConversationState = 'waiting_custom_feedback'; }
 }
-
 function fbReceiveNegativeFeedback(feedback) {
   setTimeout(() => {
     addBotMessage(`Thank you for sharing that. 🙏 We sincerely apologize for the inconvenience regarding <em>"${feedback}"</em>.`, () => {
@@ -1340,14 +1175,12 @@ function fbReceiveNegativeFeedback(feedback) {
     });
   }, 700);
 }
-
 function fbSendFeedbackToWhatsApp(feedback) {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
   const msg = `⚠️ *Customer Feedback Alert — 99Times Square*\n\n🪑 *Table:* ${tableNumber || 'Walk-in'}\n🕐 *Time:* ${timeStr}\n\n📝 *Feedback:* ${feedback}\n\n_Please follow up with this customer._ 🙏`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
-
 function addBotMessage(html, callback) {
   const messages = document.getElementById('fbMessages');
   const typingId = 'typing_' + Date.now();
@@ -1368,7 +1201,6 @@ function addBotMessage(html, callback) {
     if (callback) callback();
   }, delay);
 }
-
 function addBotMessageWithReviewLink() {
   const messages = document.getElementById('fbMessages');
   const msgEl = document.createElement('div');
@@ -1384,7 +1216,6 @@ function addBotMessageWithReviewLink() {
   messages.appendChild(msgEl);
   messages.scrollTop = messages.scrollHeight;
 }
-
 function addUserMessage(text) {
   const messages = document.getElementById('fbMessages');
   const msgEl = document.createElement('div');
@@ -1394,7 +1225,6 @@ function addUserMessage(text) {
   messages.scrollTop = messages.scrollHeight;
   fbMessageHistory.push({role:'user', content:text});
 }
-
 function setQuickReplies(options) {
   const container = document.getElementById('fbQuickReplies');
   container.innerHTML = '';
@@ -1405,9 +1235,7 @@ function setQuickReplies(options) {
     container.appendChild(btn);
   });
 }
-
 function clearQuickReplies() { document.getElementById('fbQuickReplies').innerHTML = ''; }
-
 function fbSendUserMessage() {
   const input = document.getElementById('fbTextInput');
   const text = input.value.trim();
@@ -1420,7 +1248,6 @@ function fbSendUserMessage() {
   if (fbConversationState === 'done') { setTimeout(() => addBotMessage(`Thank you again! We hope to see you soon at 99Times Square 🍽️`), 500); return; }
   setTimeout(() => addBotMessage(`Thank you for sharing that! Is there anything else you'd like to tell us? 😊`), 700);
 }
-
 function analyzeAndRespond(text) {
   const lower = text.toLowerCase();
   const pos = ['good','great','excellent','amazing','loved','fantastic','wonderful','nice','perfect','enjoyed','delicious','awesome','best','superb','happy'];
@@ -1431,7 +1258,6 @@ function analyzeAndRespond(text) {
   else if (neg.some(w=>lower.includes(w))) fbHandleSentiment('unhappy',text);
   else fbHandleSentiment('neutral',text);
 }
-
 function fbHandleKey(e) { if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); fbSendUserMessage(); } }
 function autoResizeFbInput(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; }
 </script>
